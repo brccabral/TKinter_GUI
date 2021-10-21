@@ -169,8 +169,33 @@ chosen_btn.grid(row=9, column=1, pady=10, padx=10, ipadx=20)
 
 def update_record():
     global f_name_editor, l_name_editor, address_editor, city_editor, state_editor, zipcode_editor, editor
-    print(f_name_editor.get())
     
+    conn = sqlite3.connect("address_book.db")
+    c = conn.cursor()
+
+    c.execute("""UPDATE addresses set 
+        first_name = :first,
+        last_name = :last,
+        address = :address,
+        city = :city,
+        state = :state,
+        zipcode = :zipcode
+        WHERE oid = :oid""",
+        {
+            'first': f_name_editor.get(),
+            'last': l_name_editor.get(),
+            'address': address_editor.get(),
+            'city': city_editor.get(),
+            'state': state_editor.get(),
+            'zipcode': zipcode_editor.get(),
+            'oid' : chosen_entry.get()
+        })
+    
+    
+    conn.commit()
+    conn.close()
+
+    editor.destroy()
 
 
 
