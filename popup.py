@@ -13,33 +13,45 @@ root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("400x400")
 
 def popup_info():
-    messagebox.showinfo("This is my popup", "Hello")
+    # ok="ok" ESC="ok"
+    response = messagebox.showinfo("This is my popup", "Hello")
+    print(f"{response}")
 
 def popup_warn():
-    messagebox.showwarning("This is my popup", "Hello")
+    # ok="ok" ESC="ok"
+    response = messagebox.showwarning("This is my popup", "Hello")
+    print(f"{response}")
 
 def popup_error():
-    messagebox.showerror("This is my popup", "Hello")
+    # ok="ok" ESC="ok"
+    response = messagebox.showerror("This is my popup", "Hello")
+    print(f"{response}")
 
 def popup_askquestion():
-    # yes or no
-    messagebox.askquestion("Question", "Go forward?")
+    # yes="yes" or no="no", can't ESC to cancel
+    response = messagebox.askquestion("Question", "Go forward?")
+    print(f"{response}")
 
 def popup_askokcancel():
-    # ok or cancel
-    messagebox.askokcancel("Question", "Accept change?")
+    # ok=True or cancel=False, ESC=False
+    response = messagebox.askokcancel("Question", "Accept change?")
+    print(f"{response}")
 
 def popup_askretrycancel():
-    # retry or cancel
-    messagebox.askretrycancel("Question", "Can't open")
+    # retry=True or cancel=False, ESC=False
+    # it plays warning sound
+    response = messagebox.askretrycancel("Question", "Can't open")
+    print(f"{response}")
 
 def popup_askyesno():
-    # yes or no
-    messagebox.askyesno("Question", "Go left?")
+    # yes=True or no=False, can't ESC to cancel
+    response = messagebox.askyesno("Question", "Go left?")
+    print(f"{response}")
 
 def popup_askyesnocancel():
-    # yes or no or cancel
-    messagebox.askyesnocancel("Question", "Yes, no or cancel?")
+    # yes=True or no=False or cancel=None
+    response = messagebox.askyesnocancel("Question", "Yes, no or cancel?")
+    print(f"{response}")
 
 Button(root, text="Info", command=popup_info).pack()
 Button(root, text="Warning", command=popup_warn).pack()
