@@ -71,6 +71,22 @@ def submit():
 submit_btn = tk.Button(root, text="Add record to DB", command=submit)
 submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
+def query_values():
+    conn = sqlite3.connect("address_book.db")
+    c = conn.cursor()
+
+    # c.execute("SELECT f_name, l_name, address, city, state, zipcode FROM addresses")
+    c.execute("SELECT *, oid FROM addresses")
+    # c.fetchone()
+    # c.fetchmany(15)
+    records = c.fetchall()
+    print(records)
+    
+    conn.close()
+    
+
+query_btn = tk.Button(root, text="Show records", command=query_values)
+query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
 
 root.mainloop()
