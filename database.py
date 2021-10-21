@@ -80,8 +80,14 @@ def query_values():
     # c.fetchone()
     # c.fetchmany(15)
     records = c.fetchall()
-    print(records)
+    print_records = ""
+    for record in records:
+        for r in record:
+            print_records += str(r) + "\n"
     
+    query_label = tk.Label(root, text=print_records)
+    query_label.grid(row=8, column=0, columnspan=2)
+
     conn.close()
     
 
