@@ -111,39 +111,40 @@ delete_btn = tk.Button(root, text="Delete record", command=delete_values)
 delete_btn.grid(row=8, column=1, pady=10, padx=10, ipadx=20)
 
 def query_chosen():
+    global f_name_editor, l_name_editor, address_editor, city_editor, state_editor, zipcode_editor, editor
     editor = tk.Tk()
     editor.title("Update record")
     
     f_name_label = tk.Label(editor, text="First name")
     f_name_label.grid(row=0, column=0, pady=(10,0))
-    f_name = tk.Entry(editor, width=30)
-    f_name.grid(row=0, column=1, padx=20, pady=(10,0))
+    f_name_editor = tk.Entry(editor, width=30)
+    f_name_editor.grid(row=0, column=1, padx=20, pady=(10,0))
 
     l_name_label = tk.Label(editor, text="Last name")
     l_name_label.grid(row=1, column=0)
-    l_name = tk.Entry(editor, width=30)
-    l_name.grid(row=1, column=1)
+    l_name_editor = tk.Entry(editor, width=30)
+    l_name_editor.grid(row=1, column=1)
 
     address_label = tk.Label(editor, text="Address")
     address_label.grid(row=2, column=0)
-    address = tk.Entry(editor, width=30)
-    address.grid(row=2, column=1)
+    address_editor = tk.Entry(editor, width=30)
+    address_editor.grid(row=2, column=1)
 
     city_label = tk.Label(editor, text="City")
     city_label.grid(row=3, column=0)
-    city = tk.Entry(editor, width=30)
-    city.grid(row=3, column=1)
+    city_editor = tk.Entry(editor, width=30)
+    city_editor.grid(row=3, column=1)
 
     state_label = tk.Label(editor, text="State")
     state_label.grid(row=4, column=0)
-    state = tk.Entry(editor, width=30)
-    state.grid(row=4, column=1)
+    state_editor = tk.Entry(editor, width=30)
+    state_editor.grid(row=4, column=1)
 
     zipcode_label = tk.Label(editor, text="Zipcode")
     zipcode_label.grid(row=5, column=0)
-    zipcode = tk.Entry(editor, width=30)
-    zipcode.grid(row=5, column=1)
-    
+    zipcode_editor = tk.Entry(editor, width=30)
+    zipcode_editor.grid(row=5, column=1)
+
     update_btn = tk.Button(editor, text="Save", command=update_record)
     update_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=20)
 
@@ -152,12 +153,12 @@ def query_chosen():
 
     c.execute("SELECT *, oid FROM addresses WHERE oid = "+chosen_entry.get())
     records = c.fetchone()
-    f_name.insert(0, records[0])
-    l_name.insert(0, records[1])
-    address.insert(0, records[2])
-    city.insert(0, records[3])
-    state.insert(0, records[4])
-    zipcode.insert(0, records[5])
+    f_name_editor.insert(0, records[0])
+    l_name_editor.insert(0, records[1])
+    address_editor.insert(0, records[2])
+    city_editor.insert(0, records[3])
+    state_editor.insert(0, records[4])
+    zipcode_editor.insert(0, records[5])
 
     conn.close()
 
@@ -167,7 +168,10 @@ chosen_btn = tk.Button(root, text="Search", command=query_chosen)
 chosen_btn.grid(row=9, column=1, pady=10, padx=10, ipadx=20)
 
 def update_record():
-    pass
+    global f_name_editor, l_name_editor, address_editor, city_editor, state_editor, zipcode_editor, editor
+    print(f_name_editor.get())
+    
+
 
 
 
