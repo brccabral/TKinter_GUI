@@ -16,4 +16,10 @@ str_value.set("Tuesday") # if don't set, no value will be selected when start
 drop = tk.OptionMenu(root, str_value, "Monday", "Tuesday", "Wednesday")
 drop.pack()
 
+def show_value():
+    tk.Label(root, text=str_value.get()).pack()
+
+my_button = tk.Button(root, text="Show selection", command=show_value)
+my_button.pack()
+
 root.mainloop()
