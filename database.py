@@ -12,9 +12,6 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("400x400")
 
-conn = sqlite3.connect("address_book.db")
-
-c = conn.cursor()
 
 f_name_label = tk.Label(root, text="First name")
 f_name_label.grid(row=0, column=0)
@@ -47,6 +44,20 @@ zipcode = tk.Entry(root, width=30)
 zipcode.grid(row=5, column=1)
 
 def submit():
+    conn = sqlite3.connect("address_book.db")
+    c = conn.cursor()
+
+    c.execute("INSERT INTO addresses VALUES(:f_name, :l_name, :address, :city, :state, :zipcode)",
+    {
+        'f_name':f_name.get(),
+        'l_name':l_name.get(),
+        'address':address.get(),
+        'city':city.get(),
+        'state':state.get(),
+        'zipcode':zipcode.get(),
+    }
+    )
+
     f_name.delete(0, END)
     l_name.delete(0, END)
     address.delete(0, END)
@@ -54,10 +65,12 @@ def submit():
     state.delete(0, END)
     zipcode.delete(0, END)
 
+    conn.commit()
+    conn.close()
+
 submit_btn = tk.Button(root, text="Add record to DB", command=submit)
 submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-conn.commit()
-conn.close()
+
 
 root.mainloop()
