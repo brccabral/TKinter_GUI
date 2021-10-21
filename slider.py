@@ -14,11 +14,12 @@ root.geometry("400x400")
 vertical = tk.Scale(root, from_=0, to=200)
 vertical.pack()
 
-horizontal = tk.Scale(root, from_=0, to=200, orient=HORIZONTAL)
+horizontal = tk.Scale(root, from_=200, to=400, orient=HORIZONTAL)
 horizontal.pack()
 
 def show_hor():
     my_horizontal = tk.Label(root, text=horizontal.get()).pack()
+    root.geometry(str(horizontal.get())+"x400")
 
 my_btn = tk.Button(root, text="Show horizontal", command=show_hor).pack()
 
