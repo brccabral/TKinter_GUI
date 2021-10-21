@@ -93,5 +93,21 @@ def query_values():
 query_btn = tk.Button(root, text="Show records", command=query_values)
 query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
+def delete_values():
+    conn = sqlite3.connect("address_book.db")
+    c = conn.cursor()
+
+    c.execute("DELETE FROM addresses where oid=" + delete_entry.get())
+    
+    conn.commit()
+
+    delete_entry.delete(0, END)
+
+    conn.close()
+
+delete_entry = tk.Entry(root, width=30)
+delete_entry.grid(row=8, column=0, padx=(10,0))
+delete_btn = tk.Button(root, text="Delete record", command=delete_values)
+delete_btn.grid(row=8, column=1, pady=10, padx=10, ipadx=20)
 
 root.mainloop()
