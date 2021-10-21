@@ -85,7 +85,7 @@ def query_values():
         print_records += " ".join(map(str, record)) + "\n"
     
     query_label = tk.Label(root, text=print_records)
-    query_label.grid(row=9, column=0, columnspan=2)
+    query_label.grid(row=10, column=0, columnspan=2)
 
     conn.close()
     
@@ -109,5 +109,26 @@ delete_entry = tk.Entry(root, width=30)
 delete_entry.grid(row=8, column=0, padx=(10,0))
 delete_btn = tk.Button(root, text="Delete record", command=delete_values)
 delete_btn.grid(row=8, column=1, pady=10, padx=10, ipadx=20)
+
+def query_chosen():
+    conn = sqlite3.connect("address_book.db")
+    c = conn.cursor()
+
+    c.execute("SELECT *, oid FROM addresses WHERE oid = "+chosen_entry.get())
+    records = c.fetchone()
+    f_name.insert(0, records[0])
+    l_name.insert(0, records[1])
+    address.insert(0, records[2])
+    city.insert(0, records[3])
+    state.insert(0, records[4])
+    zipcode.insert(0, records[5])
+
+    conn.close()
+
+chosen_entry = tk.Entry(root, width=30)
+chosen_entry.grid(row=9, column=0, padx=(10,0))
+chosen_btn = tk.Button(root, text="Search", command=query_chosen)
+chosen_btn.grid(row=9, column=1, pady=10, padx=10, ipadx=20)
+
 
 root.mainloop()
