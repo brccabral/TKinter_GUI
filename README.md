@@ -5,3 +5,7 @@ Followed tutorial https://www.youtube.com/watch?v=YXPyB4XeYLA
 _Need to install Pillow for images handling_  
 
 pip install pillow
+
+_Module requests is for json\_request example_
+
+pip install requests
