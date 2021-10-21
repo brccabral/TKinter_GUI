@@ -14,3 +14,5 @@ _Modules numpy and matplotlib are for matplotlib example_
 
     pip install numpy  
     pip install matplotlib  
+
+Thanks to https://datatofish.com/matplotlib-charts-tkinter-gui/ for showing how to plot charts in tkinter window itself, and not in a new window
