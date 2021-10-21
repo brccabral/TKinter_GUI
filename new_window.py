@@ -26,6 +26,10 @@ def open_window():
     img_holder = tk.Label(top, image=image)
     img_holder.pack()
 
+    # top.destroy, not quit
+    button = tk.Button(top, text="Close", command=top.destroy)
+    button.pack()
+
 
 
 button = tk.Button(root, text="Open new window", command=open_window)
