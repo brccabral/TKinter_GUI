@@ -85,7 +85,7 @@ def query_values():
         print_records += " ".join(map(str, record)) + "\n"
     
     query_label = tk.Label(root, text=print_records)
-    query_label.grid(row=10, column=0, columnspan=2)
+    query_label.grid(row=11, column=0, columnspan=2)
 
     conn.close()
     
@@ -111,6 +111,42 @@ delete_btn = tk.Button(root, text="Delete record", command=delete_values)
 delete_btn.grid(row=8, column=1, pady=10, padx=10, ipadx=20)
 
 def query_chosen():
+    editor = tk.Tk()
+    editor.title("Update record")
+    
+    f_name_label = tk.Label(editor, text="First name")
+    f_name_label.grid(row=0, column=0, pady=(10,0))
+    f_name = tk.Entry(editor, width=30)
+    f_name.grid(row=0, column=1, padx=20, pady=(10,0))
+
+    l_name_label = tk.Label(editor, text="Last name")
+    l_name_label.grid(row=1, column=0)
+    l_name = tk.Entry(editor, width=30)
+    l_name.grid(row=1, column=1)
+
+    address_label = tk.Label(editor, text="Address")
+    address_label.grid(row=2, column=0)
+    address = tk.Entry(editor, width=30)
+    address.grid(row=2, column=1)
+
+    city_label = tk.Label(editor, text="City")
+    city_label.grid(row=3, column=0)
+    city = tk.Entry(editor, width=30)
+    city.grid(row=3, column=1)
+
+    state_label = tk.Label(editor, text="State")
+    state_label.grid(row=4, column=0)
+    state = tk.Entry(editor, width=30)
+    state.grid(row=4, column=1)
+
+    zipcode_label = tk.Label(editor, text="Zipcode")
+    zipcode_label.grid(row=5, column=0)
+    zipcode = tk.Entry(editor, width=30)
+    zipcode.grid(row=5, column=1)
+    
+    update_btn = tk.Button(editor, text="Save", command=update_record)
+    update_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=20)
+
     conn = sqlite3.connect("address_book.db")
     c = conn.cursor()
 
@@ -129,6 +165,10 @@ chosen_entry = tk.Entry(root, width=30)
 chosen_entry.grid(row=9, column=0, padx=(10,0))
 chosen_btn = tk.Button(root, text="Search", command=query_chosen)
 chosen_btn.grid(row=9, column=1, pady=10, padx=10, ipadx=20)
+
+def update_record():
+    pass
+
 
 
 root.mainloop()
