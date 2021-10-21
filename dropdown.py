@@ -10,10 +10,12 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("400x400")
 
-str_value = tk.StringVar()
-str_value.set("Tuesday") # if don't set, no value will be selected when start
+options = ["Monday", "Tuesday", "Wednesday"]
 
-drop = tk.OptionMenu(root, str_value, "Monday", "Tuesday", "Wednesday")
+str_value = tk.StringVar()
+str_value.set(options[1]) # if don't set, no value will be selected when start
+
+drop = tk.OptionMenu(root, str_value, *options)
 drop.pack()
 
 def show_value():
