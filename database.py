@@ -10,13 +10,13 @@ if os.name == "nt":
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
-root.geometry("400x400")
+# root.geometry("400x400")
 
 
 f_name_label = tk.Label(root, text="First name")
-f_name_label.grid(row=0, column=0)
+f_name_label.grid(row=0, column=0, pady=(10,0))
 f_name = tk.Entry(root, width=30)
-f_name.grid(row=0, column=1, padx=20)
+f_name.grid(row=0, column=1, padx=20, pady=(10,0))
 
 l_name_label = tk.Label(root, text="Last name")
 l_name_label.grid(row=1, column=0)
@@ -82,11 +82,10 @@ def query_values():
     records = c.fetchall()
     print_records = ""
     for record in records:
-        for r in record:
-            print_records += str(r) + "\n"
+        print_records += " ".join(map(str, record)) + "\n"
     
     query_label = tk.Label(root, text=print_records)
-    query_label.grid(row=8, column=0, columnspan=2)
+    query_label.grid(row=9, column=0, columnspan=2)
 
     conn.close()
     
