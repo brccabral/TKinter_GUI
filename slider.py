@@ -17,5 +17,9 @@ vertical.pack()
 horizontal = tk.Scale(root, from_=0, to=200, orient=HORIZONTAL)
 horizontal.pack()
 
+def show_hor():
+    my_horizontal = tk.Label(root, text=horizontal.get()).pack()
+
+my_btn = tk.Button(root, text="Show horizontal", command=show_hor).pack()
 
 root.mainloop()
