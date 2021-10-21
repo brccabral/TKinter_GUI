@@ -11,7 +11,11 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("400x400")
 
-vertical = tk.Scale(root, from_=0, to=200)
+def dynamic_size(value):
+    my_horizontal = tk.Label(root, text=value).pack()
+    root.geometry(str("400x")+value)
+
+vertical = tk.Scale(root, from_=200, to=500, command=dynamic_size)
 vertical.pack()
 
 horizontal = tk.Scale(root, from_=200, to=400, orient=HORIZONTAL)
