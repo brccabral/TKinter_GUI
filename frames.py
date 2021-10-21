@@ -16,6 +16,9 @@ frame = tk.LabelFrame(root, text="This is my frame", padx=50, pady=50)
 frame.pack(padx=10, pady=10)
 
 b = tk.Button(frame, text="Click me")
-b.pack()
+b2 = tk.Button(frame, text="Another button")
+# frames have their own grid
+b.grid(row=0, column=0)
+b2.grid(row=1, column=1)
 
 root.mainloop()
