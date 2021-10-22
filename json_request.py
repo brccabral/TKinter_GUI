@@ -19,7 +19,7 @@ def ziplookup():
     label = ""
     weather_color = 'grey'
     try:
-        api_request = requests.get(f"https://www.airnowapi.org/aq/forecast/zipCode/?format=application/json&zipCode={zipcode}&date=2021-10-21&distance=25&API_KEY=XXXX")
+        api_request = requests.get(f"https://www.airnowapi.org/aq/forecast/zipCode/?format=application/json&zipCode={zipcode}&date=2021-10-21&distance=25&API_KEY=")
         api = json.loads(api_request.content)
         max_quality = -999
         areas = []
