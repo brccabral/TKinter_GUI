@@ -27,6 +27,12 @@ def edit_cut():
     my_label = tk.Label(edit_cut_frame, text="You edit cut").pack()
 
 def hide_all_frames():
+    # remove anything inside the frame
+    for widget in file_new_frame.winfo_children():
+        widget.destroy()
+    for widget in edit_cut_frame.winfo_children():
+        widget.destroy()
+    
     file_new_frame.pack_forget()
     edit_cut_frame.pack_forget()
 
