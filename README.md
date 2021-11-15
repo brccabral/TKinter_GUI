@@ -1,6 +1,7 @@
 # Create GUI apps in Python
 
 Followed tutorial https://www.youtube.com/watch?v=YXPyB4XeYLA  
+More videos in this playlist https://www.youtube.com/playlist?list=PLCC34OHNcOtoC6GglhF3ncJ5rLwQrLGnV  
 
 _Need to install Pillow for images handling_  
 
