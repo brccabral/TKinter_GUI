@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter.constants import ANCHOR, END
+from tkinter.constants import ANCHOR, END, RIGHT, VERTICAL, Y
 
 root = tk.Tk()
 root.title("TKinter GUI")
@@ -11,7 +11,14 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("600x800")
 
-my_listbox = tk.Listbox(root, width=50)
+# without scrollbar the list can be scrolled, but user won't notice
+my_frame = tk.Frame(root)
+my_scrollbar = tk.Scrollbar(my_frame, orient=VERTICAL)
+my_listbox = tk.Listbox(my_frame, width=50, yscrollcommand=my_scrollbar.set)
+my_scrollbar.config(command=my_listbox.yview)
+my_scrollbar.pack(side=RIGHT, fill=Y)
+my_frame.pack()
+
 my_listbox.pack(pady=15)
 my_listbox.insert(END, "Item1")
 my_listbox.insert(END, "Item2")
