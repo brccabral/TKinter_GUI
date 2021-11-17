@@ -20,4 +20,9 @@ _Need tkcalendar to work with Calendar_
 
     pip install tkcalendar  
 
+_To run Text to Speech_
+
+    pip install pyttsx3
+    sudo apt install libespeak1 espeak ffmpeg
+
 Thanks to https://datatofish.com/matplotlib-charts-tkinter-gui/ for showing how to plot charts in tkinter window itself, and not in a new window
