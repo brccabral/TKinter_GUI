@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 from tkinter.constants import DISABLED, E, SUNKEN, W
+# tkinter doesn't work with jpg
 from PIL import ImageTk, Image
 
 root = tk.Tk()
