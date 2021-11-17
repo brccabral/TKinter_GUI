@@ -46,7 +46,14 @@ my_entry = tk.Entry(root, font=('Helvetica', 28))
 my_entry.pack(pady=10)
 
 def talk():
-    engine = pyttsx3.init()
+    engine = pyttsx3.init(driverName='espeak', debug=True)
+    # on terminal 
+    # this lists the languages only
+    ## espeak --voices=
+    # with the language we can check the available voices (female/different accents)
+    ## espeak --voices=en
+    engine.setProperty('voice', 'us-mbrola-1')
+    engine.setProperty('rate', 150)
     engine.say(my_entry.get())
     engine.runAndWait()
     engine.stop()
