@@ -8,54 +8,42 @@ root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 e = tk.Entry(root, width=35, borderwidth=5)
 e.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
+expression = ''
+last_operation = ''
+last_number = ''
+
 def btn_value(number):
+    global last_number
     current = e.get()
     e.delete(0, END)
-    e.insert(0, current + str(number))
+    last_number = current + str(number)
+    e.insert(0, last_number)
 
-previous = 0
-operation = ""
-last_number = "" # saves last number to keep pressing equal with same number
 def btn_operation(c_func):
-    global previous, operation, last_number
-    if e.get() != "":
-        previous = e.get()
-    operation = c_func
-    last_number = ""
+    global expression, last_operation
+    if not e.get():
+        return
+    last_operation = c_func
+    expression = e.get()+last_operation
+    label.config(text=expression)
     e.delete(0, END)
 
 def btn_equal():
-    global last_number
-    current = e.get()
-    if current == "":
+    global expression, last_number
+    if not e.get():
         return
-    if last_number == "":
-        last_number = previous
+    expression += f"{last_number}"
+    result = eval(expression)
+    expression = f"{result}{last_operation}"
+    label.config(text=expression+last_number)
     e.delete(0, END)
-    result = ""
-    if operation == "+":
-        result = float(last_number) + float(current)
-    if operation == "*":
-        result = float(last_number) * float(current)
-    if operation == "-":
-        if last_number == previous:
-            result = float(last_number) - float(current)
-        else:
-            result = float(current) - float(last_number)
-    if operation == "/":
-        if last_number == previous:
-            result = float(last_number) / float(current)
-        else:
-            result = float(current) / float(last_number)
-    if last_number == previous:
-        last_number = current
-    e.insert(0, str(result))
+    e.insert(0, f"{result}")
 
 def btn_clear():
-    global previous, operation
+    global expression
     e.delete(0, END)
-    previous = 0
-    operation = ""
+    expression = ''
+    label.config(text=expression)
 
 button_1 = tk.Button(root, text="1", padx=40, pady=20, command=lambda: btn_value(1))
 button_2 = tk.Button(root, text="2", padx=40, pady=20, command=lambda: btn_value(2))
@@ -94,5 +82,7 @@ button_clear.grid(row=4, column=1)
 button_equal.grid(row=4, column=2)
 button_add.grid(row=4, column=3)
 
+label = tk.Label(root, text='')
+label.grid(row=5, column=0, columnspan=4)
 
 root.mainloop()
