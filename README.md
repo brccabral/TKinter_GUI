@@ -25,4 +25,22 @@ _To run Text to Speech_
     pip install pyttsx3
     sudo apt install libespeak1 espeak ffmpeg
 
+_To play sound_
+
+    pip install pydub
+    sudo apt-get install -y python3-dev libasound2-dev
+
 Thanks to https://datatofish.com/matplotlib-charts-tkinter-gui/ for showing how to plot charts in tkinter window itself, and not in a new window
+
+___ 
+# Assets
+
+1. Star icon
+    * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    * <a href="https://www.flaticon.com/free-icon/star_1828884?related_id=1828884">https://www.flaticon.com/free-icon/star_1828884?related_id=1828884</a>
+    * I have resized the icon to 48x48
+  
+
+2. Song Orchestral
+    * <div>Song made by <a href="www.youtube.com/c/Tadon" title="www.youtube.com/c/Tadon">www.youtube.com/c/Tadon</a> from <a href="https://opengameart.org/content/forward-operating-base/" title="opengameart.org">opengameart.org</a></div>
+    * <a href="https://opengameart.org/content/forward-operating-base">https://opengameart.org/content/forward-operating-base</a>
