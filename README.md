@@ -49,6 +49,7 @@ ___
 2. Song Orchestral
     * <div>Song made by <a href="www.youtube.com/c/Tadon" title="www.youtube.com/c/Tadon">www.youtube.com/c/Tadon</a> from <a href="https://opengameart.org/content/forward-operating-base/" title="opengameart.org">opengameart.org</a></div>
     * <a href="https://opengameart.org/content/forward-operating-base">https://opengameart.org/content/forward-operating-base</a>
+    * <a href="https://opengameart.org/content/first-snowfall">https://opengameart.org/content/first-snowfall</a>
 
 3. Music player icons
     * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
