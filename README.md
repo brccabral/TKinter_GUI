@@ -34,8 +34,10 @@ I tested simpleaudio, but it doesn't have a pause() feature.
 I checked musicplayer, but it is not maintained anymore.
 I checked sounddevice, but it is too complex.
 The easiest way is pygame, even though just playing sounds is not the objective.
+Module mutagen is used to get the length of the sound
 
     pip install pygame
+    pip install mutagen
 
 ___ 
 # Assets
