@@ -1,7 +1,7 @@
 import tkinter as tk
-from tkinter import Event, IntVar, Label, Menu, Scale, filedialog
+from tkinter import Event, Frame, IntVar, Label, LabelFrame, Menu, filedialog, ttk
 import os
-from tkinter.constants import ACTIVE, BOTTOM, DISABLED, E, END, GROOVE, HORIZONTAL, X
+from tkinter.constants import ACTIVE, ANCHOR, BOTTOM, CENTER, DISABLED, E, END, GROOVE, HORIZONTAL, N, S, VERTICAL, W, X
 import pygame
 import time
 from mutagen.mp3 import MP3
@@ -25,8 +25,27 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("700x450")
 
-song_box = tk.Listbox(root, bg="black", fg="green", width=80)
-song_box.pack(pady=20)
+master_frame = Frame(root)
+master_frame.pack(pady=20)
+
+song_box = tk.Listbox(master_frame, bg="black", fg="green", width=70)
+song_box.grid(row=0, column=0, pady=10)
+
+def set_slider_volume(event: Event):
+    logging.debug(f'{volume_slider.get()=}')
+    pygame.mixer.music.set_volume(volume_slider.get())
+    volume_label.config(text=int(100*volume_slider.get()))
+
+volume_frame = LabelFrame(master_frame, text="Volume")
+volume_frame.grid(row=0, column=1, padx=10)
+
+# ttk.Scale() moves slider smoothly, while tk.Scale() moves in integer intervals
+volume_slider = ttk.Scale(volume_frame, value=1, from_=0, to=1, orient=VERTICAL, length=150)
+volume_slider.grid(row=0, column=0, padx=10, pady=5)
+volume_slider.bind("<ButtonRelease-1>", set_slider_volume)
+
+volume_label = Label(volume_frame, text="100", anchor=CENTER)
+volume_label.grid(row=0, column=1)
 
 back_img = tk.PhotoImage(file="images/previous.png")
 play_img = tk.PhotoImage(file="images/play-button.png")
@@ -35,8 +54,8 @@ play_pause_img = tk.PhotoImage(file="images/play-pause-button.png")
 forward_img = tk.PhotoImage(file="images/skip-button.png")
 stop_img = tk.PhotoImage(file="images/stop-button.png")
 
-controls_frame = tk.Frame(root)
-controls_frame.pack()
+controls_frame = tk.Frame(master_frame)
+controls_frame.grid(row=1, column=0, pady=10, columnspan=2)
 
 current_song_index = None
 is_playing = False
@@ -204,7 +223,7 @@ status_bar.pack(fill=X, side=BOTTOM, ipady=2)
 
 def set_slide(current_time: float):
     slider_var.set(current_time)
-    slider.config(label=time.strftime('%H:%M:%S', time.gmtime(current_time)))
+    slider_label.config(text=time.strftime('%H:%M:%S', time.gmtime(current_time)))
 
 def set_slider_start_position(event: Event):
     global slider_start_position
@@ -212,8 +231,8 @@ def set_slider_start_position(event: Event):
         return
     value = slider.get()
     slider_start_position = float(value)
+    status_bar.after_cancel(status_bar_after)
     play_song(current_song_index, slider_start_position)
-    set_slide(slider_start_position)
 
 slider_var = IntVar(root, value=0)
 # if we use Scale(command=FUNC), FUNC will be called at every slide
@@ -221,10 +240,11 @@ slider_var = IntVar(root, value=0)
 # and these many after will be called sometime even after song is finished.
 # It is better to use bind() and get the slider position only when user
 # releases it, so FUNC will be called only once
-slider = Scale(root, from_=0, to=100, orient=HORIZONTAL, length=550, variable=slider_var, showvalue=False, state=DISABLED)
+slider = ttk.Scale(master_frame, from_=0, to=100, orient=HORIZONTAL, length=550, variable=slider_var, state=DISABLED)
 slider.bind("<ButtonRelease-1>",set_slider_start_position)
-slider.pack(pady=1)
-slider.config(label=time.strftime('%H:%M:%S', time.gmtime(0)))
+slider.grid(row=2, column=0, pady=20, columnspan=2)
+slider_label = Label(master_frame, text=time.strftime('%H:%M:%S', time.gmtime(0)), anchor=W)
+slider_label.grid(row=3, column=0)
 
 root.mainloop()
 pygame.quit()
