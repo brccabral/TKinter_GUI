@@ -56,7 +56,7 @@ def delete_all():
 def select_all():
     result = []
     for item in my_listbox.curselection():
-        result.append(f"{my_listbox.get(item)}")
+        result.append(f"{item}={my_listbox.get(item)}")
     my_label.config(text="\n".join(result))
 
 def delete_multiple():
