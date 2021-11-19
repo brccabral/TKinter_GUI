@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter import Button, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
+from tkinter import Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
 from tkinter.constants import BOTTOM, E, END, INSERT, RIGHT, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
 import tkinter.font as tkFont
 import logging
@@ -8,7 +8,8 @@ logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s
 import _tkinter
 
 root = tk.Tk()
-root.title("TKinter GUI")
+appname = "Textpad"
+root.title(appname)
 if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
@@ -45,31 +46,53 @@ menu = Menu(root)
 root.config(menu=menu)
 
 def new_txt():
-    pass
+    textbox.delete(1.0, END)
+    root.title(f'New file - {appname}')
+    status_bar.config(text="New file        ")
 
 def open_txt():
     buffer = ''
-    filename = filedialog.askopenfilename(initialdir=".", title="Open a txt file", filetypes=(("Text files", "*.txt"),))
+    filename = filedialog.askopenfilename(initialdir=".", title="Open a txt file", filetypes=(("Text files", "*.txt"),("HTML files", "*.html"),("Python files", "*.py"),("All files", "*.*")))
     if not filename:
         return
+    textbox.delete("1.0", END)
     with open(filename, "r") as text_file:
         buffer = text_file.read()
     textbox.insert(END, buffer)
-
-    root.title(f"{os.path.basename(filename)} - Textpad")
+    status_bar.config(text=f"{filename}        ")
+    root.title(f"{os.path.basename(filename)} - {appname}")
 
 def save_txt():
-    filename = filedialog.asksaveasfilename(initialdir=".", title="Save a txt file", filetypes=(("Text files", "*.txt"),))
+    status_text = str(status_bar.cget('text')).strip()
+    if status_text == "New file" or status_text == "Ready":
+        return save_as_txt()
+    filename = status_text.replace("Saved ", "")
+    if not filename:
+        return
+    logging.debug(f'{filename}')
+    with open(filename, "w") as text_file:
+        text_file.write(textbox.get(1.0, END))
+    status_bar.config(text=f"Saved {filename}        ")
+    root.title(f"{os.path.basename(filename)} - {appname}")
+
+def save_as_txt():
+    # I didn't get how defaultextension= works
+    filename = filedialog.asksaveasfilename(initialdir=".", title="Save file", filetypes=(("Text files", "*.txt"),("HTML files", "*.html"),("Python files", "*.py"),("All files", "*.*")))
     if not filename:
         return
     with open(filename, "w") as text_file:
         text_file.write(textbox.get(1.0, END))
+    status_bar.config(text=f"Saved {filename}        ")
+    root.title(f"{os.path.basename(filename)} - {appname}")
 
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_txt)
 file_menu.add_command(label="Open", command=open_txt)
 file_menu.add_command(label="Save", command=save_txt)
+file_menu.add_command(label="Save as", command=save_as_txt)
+file_menu.add_separator()
+file_menu.add_command(label="Exit", command=root.quit)
 
 def cut_txt():
     pass
@@ -123,7 +146,7 @@ def add_image():
 def select_text():
     selected = textbox.selection_get()
 
-status_bar = Label(root, text='Ready ', relief=SUNKEN, anchor=E)
+status_bar = Label(root, text='Ready        ', relief=SUNKEN, anchor=E)
 status_bar.pack(fill=X, side=BOTTOM, ipady=5)
 
 print(tkFont.names())
