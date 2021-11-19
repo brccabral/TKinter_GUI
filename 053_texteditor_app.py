@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter import Entry, Event, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
+from tkinter import Button, Entry, Event, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
 from tkinter.constants import BOTTOM, E, END, HORIZONTAL, INSERT, NONE, RIGHT, SEL, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
 import tkinter.font as tkFont
 import logging
@@ -21,6 +21,9 @@ def clear():
     # here is different from others
     # it starts with 1.0 not 0
     textbox.delete(1.0, END)
+
+buttons_frame = Frame(root)
+buttons_frame.pack(pady=5)
 
 text_frame = Frame(root)
 text_frame.pack(pady=5)
@@ -47,9 +50,12 @@ text_scroll.config(command=textbox.yview)
 horizontal_scroll.config(command=textbox.xview)
 
 
-bold_font = tkFont.Font(weight=tkFont.BOLD, family='Helvetica', size=16)
-italic_font = tkFont.Font(slant=tkFont.ITALIC, family='Helvetica', size=16)
-roman_font = tkFont.Font(slant=tkFont.ROMAN, family='Helvetica', size=14)
+bold_font = tkFont.Font(root, textbox.cget('font'))
+bold_font.configure(weight=tkFont.BOLD)
+italic_font = tkFont.Font(root, textbox.cget('font'))
+italic_font.configure(slant=tkFont.ITALIC)
+roman_font = tkFont.Font(root, textbox.cget('font'))
+roman_font.configure(slant=tkFont.ROMAN, size=14)
 
 textbox.tag_configure("bold", font=bold_font)
 textbox.tag_configure("italic", font=italic_font)
@@ -199,6 +205,13 @@ font_menu.add_command(label="Roman", command=lambda: change_font("roman"))
 textbox.bind("<Control-Key-b>", font_event)
 textbox.bind("<Control-Key-i>", font_event)
 textbox.bind("<Control-Key-r>", font_event)
+
+bold_button = Button(buttons_frame, font=bold_font, text="B", command=lambda: change_font("bold"))
+bold_button.grid(row=0, column=0, padx=5)
+italic_button = Button(buttons_frame, font=italic_font, text="I", command=lambda: change_font("italic"))
+italic_button.grid(row=0, column=1, padx=5)
+roman_button = Button(buttons_frame, font=roman_font, text="R", command=lambda: change_font("roman"))
+roman_button.grid(row=0, column=2, padx=5)
 
 # PhotoImage can't open .jpg, use Pillow for .jpg
 image = PhotoImage(file="images/star.png")
