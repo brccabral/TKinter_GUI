@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter import Entry, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
+from tkinter import Entry, Event, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
 from tkinter.constants import BOTTOM, E, END, INSERT, RIGHT, SEL, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
 import tkinter.font as tkFont
 import logging
@@ -158,7 +158,19 @@ textbox.bind("<Control-Key-a>", select_all)
 textbox.bind("<Control-Key-z>", text_undo)
 textbox.bind("<Control-Key-y>", text_redo)
 
+def font_event(event: Event):
+    if event.keysym == "b":
+        change_font("bold")
+    elif event.keysym == "i":
+        change_font("italic")
+    elif event.keysym == "r":
+        change_font("roman")
+    return "break" # this avoids default textbox behavior
+
 def change_font(tag_name):
+    if not textbox.tag_ranges(SEL):
+        logging.debug(f'no text selected')
+        return
     current_tags = textbox.tag_names(SEL_FIRST)
     if tag_name in current_tags:
         textbox.tag_remove(tag_name, SEL_FIRST, SEL_LAST)
@@ -170,6 +182,10 @@ menu.add_cascade(label="Font", menu=font_menu)
 font_menu.add_command(label="Bold", command=lambda: change_font("bold"))
 font_menu.add_command(label="Italic", command=lambda: change_font("italic"))
 font_menu.add_command(label="Roman", command=lambda: change_font("roman"))
+
+textbox.bind("<Control-Key-b>", font_event)
+textbox.bind("<Control-Key-i>", font_event)
+textbox.bind("<Control-Key-r>", font_event)
 
 # PhotoImage can't open .jpg, use Pillow for .jpg
 image = PhotoImage(file="images/star.png")
