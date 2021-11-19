@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
 from tkinter import Entry, Event, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
-from tkinter.constants import BOTTOM, E, END, INSERT, RIGHT, SEL, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
+from tkinter.constants import BOTTOM, E, END, HORIZONTAL, INSERT, NONE, RIGHT, SEL, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
 import tkinter.font as tkFont
 import logging
 logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s', datefmt='%H:%M:%S', level=logging.DEBUG)
@@ -27,12 +27,25 @@ text_frame.pack(pady=5)
 
 text_scroll = Scrollbar(text_frame)
 text_scroll.pack(side=RIGHT, fill=Y)
+horizontal_scroll = Scrollbar(text_frame, orient=HORIZONTAL)
+horizontal_scroll.pack(side=BOTTOM, fill=X)
 
-textbox = tk.Text(text_frame, width=97, height=25, font=('Helvetica', 16), selectbackground="yellow", selectforeground="black", yscrollcommand=text_scroll.set, undo=True)
+textbox = tk.Text(text_frame, 
+                width=97, 
+                height=25, 
+                font=('Helvetica', 16), 
+                selectbackground="yellow", 
+                selectforeground="black", 
+                yscrollcommand=text_scroll.set, 
+                undo=True, 
+                wrap=NONE, 
+                xscrollcommand=horizontal_scroll.set)
 textbox.pack()
 
 # textbox already scroll with mouse wheel
 text_scroll.config(command=textbox.yview)
+horizontal_scroll.config(command=textbox.xview)
+
 
 bold_font = tkFont.Font(weight=tkFont.BOLD, family='Helvetica', size=16)
 italic_font = tkFont.Font(slant=tkFont.ITALIC, family='Helvetica', size=16)
