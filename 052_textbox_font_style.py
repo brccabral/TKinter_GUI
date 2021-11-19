@@ -3,6 +3,9 @@ import os
 from tkinter import Button, Frame, Label, PhotoImage, Scrollbar, filedialog
 from tkinter.constants import END, INSERT, RIGHT, SEL_FIRST, SEL_LAST, Y
 import tkinter.font as tkFont
+import logging
+logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s', datefmt='%H:%M:%S', level=logging.DEBUG)
+import _tkinter
 
 root = tk.Tk()
 root.title("TKinter GUI")
@@ -31,7 +34,7 @@ text_frame.pack(pady=10)
 text_scroll = Scrollbar(text_frame)
 text_scroll.pack(side=RIGHT, fill=Y)
 
-textbox = tk.Text(text_frame, width=30, height=15, font=('Helvetica', 16), selectbackground="yellow", selectforeground="black", yscrollcommand=text_scroll.set)
+textbox = tk.Text(text_frame, width=30, height=15, font=('Helvetica', 16), selectbackground="yellow", selectforeground="black", yscrollcommand=text_scroll.set, undo=True)
 textbox.pack(pady=10)
 
 # textbox already scroll with mouse wheel
@@ -48,6 +51,8 @@ def open_txt():
     with open(filename, "r") as text_file:
         buffer = text_file.read()
     textbox.insert(END, buffer)
+
+    root.title(f"{os.path.basename(filename)} - Textpad")
 
 def save_txt():
     filename = filedialog.asksaveasfilename(initialdir=".", title="Save a txt file", filetypes=(("Text files", "*.txt"),))
@@ -106,6 +111,23 @@ textbox.tag_configure("bold", font=bold_font)
 textbox.tag_configure("italic", font=italic_font)
 textbox.tag_configure("roman", font=roman_font)
 
+
+def text_undo():
+    try:
+        textbox.edit_undo()
+    except _tkinter.TclError as e:
+        logging.debug(f'{e}')
+
+def text_redo():
+    try:
+        textbox.edit_redo()
+    except _tkinter.TclError as e:
+        logging.debug(f'{e}')
+
+undo_button = Button(button_frame, text="Undo", command=text_undo)
+undo_button.grid(row=2, column=0)
+redo_button = Button(button_frame, text="Redo", command=text_redo)
+redo_button.grid(row=2, column=1)
 
 label.config(text=f"{select_button.cget('text')=}")
 
