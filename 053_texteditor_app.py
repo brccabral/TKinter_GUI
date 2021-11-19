@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
-from tkinter import Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
-from tkinter.constants import BOTTOM, E, END, INSERT, RIGHT, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
+from tkinter import Entry, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog
+from tkinter.constants import BOTTOM, E, END, INSERT, RIGHT, SEL, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
 import tkinter.font as tkFont
 import logging
 logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s', datefmt='%H:%M:%S', level=logging.DEBUG)
@@ -45,12 +45,13 @@ textbox.tag_configure("roman", font=roman_font)
 menu = Menu(root)
 root.config(menu=menu)
 
-def new_txt():
+def new_txt(event):
     textbox.delete(1.0, END)
     root.title(f'New file - {appname}')
     status_bar.config(text="New file        ")
+    return "break" # this avoids default textbox behavior
 
-def open_txt():
+def open_txt(event):
     buffer = ''
     filename = filedialog.askopenfilename(initialdir=".", title="Open a txt file", filetypes=(("Text files", "*.txt"),("HTML files", "*.html"),("Python files", "*.py"),("All files", "*.*")))
     if not filename:
@@ -61,8 +62,9 @@ def open_txt():
     textbox.insert(END, buffer)
     status_bar.config(text=f"{filename}        ")
     root.title(f"{os.path.basename(filename)} - {appname}")
+    return "break" # this avoids default textbox behavior
 
-def save_txt():
+def save_txt(event):
     status_text = str(status_bar.cget('text')).strip()
     if status_text == "New file" or status_text == "Ready":
         return save_as_txt()
@@ -74,6 +76,7 @@ def save_txt():
         text_file.write(textbox.get(1.0, END))
     status_bar.config(text=f"Saved {filename}        ")
     root.title(f"{os.path.basename(filename)} - {appname}")
+    return "break" # this avoids default textbox behavior
 
 def save_as_txt():
     # I didn't get how defaultextension= works
@@ -87,41 +90,73 @@ def save_as_txt():
 
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New", command=new_txt)
-file_menu.add_command(label="Open", command=open_txt)
-file_menu.add_command(label="Save", command=save_txt)
+file_menu.add_command(label="New", command=lambda: new_txt(False), accelerator="Ctrl+n")
+file_menu.add_command(label="Open", command=lambda: open_txt(False), accelerator="Ctrl+o")
+file_menu.add_command(label="Save", command=lambda: save_txt(False), accelerator="Ctrl+s")
 file_menu.add_command(label="Save as", command=save_as_txt)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)
 
-def cut_txt():
-    pass
+root.bind("<Control-Key-n>", new_txt)
+root.bind("<Control-Key-o>", open_txt)
+root.bind("<Control-Key-s>", save_txt)
 
-def copy_txt():
-    pass
+selected = None
+def cut_txt(event):
+    global selected
+    if textbox.tag_ranges(SEL):
+        selected = textbox.selection_get()
+        root.clipboard_clear()
+        root.clipboard_append(selected)
+        textbox.delete(SEL_FIRST, SEL_LAST)
+    return "break" # this avoids default textbox behavior
 
-def paste_txt():
-    pass
+def copy_txt(event):
+    global selected
+    if textbox.tag_ranges(SEL):
+        selected = textbox.selection_get()
+        root.clipboard_clear()
+        root.clipboard_append(selected)
+    return "break" # this avoids default textbox behavior
 
-def text_undo():
+def paste_txt(event):
+    global selected
+    selected = root.clipboard_get()
+    textbox.insert(textbox.index(INSERT), selected)
+    return "break" # this avoids default textbox behavior
+
+def text_undo(event):
     try:
         textbox.edit_undo()
     except _tkinter.TclError as e:
         logging.debug(f'{e}')
+    return "break" # this avoids default textbox behavior
 
-def text_redo():
+def text_redo(event):
     try:
         textbox.edit_redo()
     except _tkinter.TclError as e:
         logging.debug(f'{e}')
+    return "break" # this avoids default textbox behavior
+
+def select_all(event):
+    textbox.tag_add(SEL, 1.0, END)
+    return "break" # this avoids default textbox behavior
 
 edit_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Edit", menu=edit_menu)
-edit_menu.add_command(label="Cut", command=cut_txt)
-edit_menu.add_command(label="Copy", command=copy_txt)
-edit_menu.add_command(label="Paste", command=paste_txt)
-edit_menu.add_command(label="Undo", command=text_undo)
-edit_menu.add_command(label="Redo", command=text_redo)
+edit_menu.add_command(label="Cut", command=lambda: cut_txt(False), accelerator="Ctrl+x")
+edit_menu.add_command(label="Copy", command=lambda: copy_txt(False), accelerator="Ctrl+c")
+edit_menu.add_command(label="Paste", command=lambda: paste_txt(False), accelerator="Ctrl+v")
+edit_menu.add_command(label="Undo", command=lambda: text_undo(False), accelerator="Ctrl+z")
+edit_menu.add_command(label="Redo", command=lambda: text_redo(False), accelerator="Ctrl+y")
+
+textbox.bind("<Control-Key-x>", cut_txt)
+textbox.bind("<Control-Key-c>", copy_txt)
+textbox.bind("<Control-Key-v>", paste_txt)
+textbox.bind("<Control-Key-a>", select_all)
+textbox.bind("<Control-Key-z>", text_undo)
+textbox.bind("<Control-Key-y>", text_redo)
 
 def change_font(tag_name):
     current_tags = textbox.tag_names(SEL_FIRST)
