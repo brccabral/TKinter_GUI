@@ -19,11 +19,6 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("1200x660")
 
-def clear():
-    # here is different from others
-    # it starts with 1.0 not 0
-    textbox.delete(1.0, END)
-
 buttons_frame = Frame(root)
 buttons_frame.pack(pady=5)
 
@@ -187,6 +182,11 @@ def select_all(event):
     textbox.tag_add(SEL, 1.0, END)
     return "break" # this avoids default textbox behavior
 
+def clear_all():
+    # here is different from others
+    # it starts with 1.0 not 0
+    textbox.delete(1.0, END)
+
 edit_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Edit", menu=edit_menu)
 edit_menu.add_command(label="Cut", command=lambda: cut_txt(False), accelerator="Ctrl+x")
@@ -195,6 +195,9 @@ edit_menu.add_command(label="Paste", command=lambda: paste_txt(False), accelerat
 edit_menu.add_separator()
 edit_menu.add_command(label="Undo", command=lambda: text_undo(False), accelerator="Ctrl+z")
 edit_menu.add_command(label="Redo", command=lambda: text_redo(False), accelerator="Ctrl+y")
+edit_menu.add_separator()
+edit_menu.add_command(label="Select all", command=lambda: select_all(False), accelerator="Ctrl+a")
+edit_menu.add_command(label="Clear all", command=clear_all)
 
 textbox.bind("<Control-Key-x>", cut_txt)
 textbox.bind("<Control-Key-c>", copy_txt)
