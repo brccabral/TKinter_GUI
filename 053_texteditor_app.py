@@ -1,5 +1,5 @@
 import tkinter as tk
-import os
+import os, sys
 from tkinter import Button, Event, Frame, Label, Menu, PhotoImage, Scrollbar, filedialog, colorchooser
 from tkinter.constants import BOTTOM, E, END, HORIZONTAL, INSERT, NONE, RIGHT, SEL, SEL_FIRST, SEL_LAST, SUNKEN, X, Y
 import tkinter.font as tkFont
@@ -12,6 +12,8 @@ appname = "Textpad"
 root.title(appname)
 if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
+    import win32print
+    import win32api
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
@@ -111,6 +113,22 @@ def save_as_txt():
     status_bar.config(text=f"Saved {filename}        ")
     root.title(f"{os.path.basename(filename)} - {appname}")
 
+def print_file(event):
+    filename = filedialog.askopenfilename(initialdir=".", title="Open a txt file", filetypes=(("Text files", "*.txt"),("HTML files", "*.html"),("Python files", "*.py"),("All files", "*.*")))
+    if not filename:
+        logging.debug(f'no file selected to print')
+    if os.name == "nt":
+        printer_name = win32print.GetDefaultPrinter()
+        if not printer_name:
+            logging.debug(f'printer not found')
+            return
+        win32api.ShellExecute(0, "print", filename, None, ".", 0)
+    else:
+        os.system(f"lpr {filename}")
+        
+
+    return "break" # this avoids default textbox behavior
+
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=lambda: new_txt(False), accelerator="Ctrl+n")
@@ -118,11 +136,14 @@ file_menu.add_command(label="Open", command=lambda: open_txt(False), accelerator
 file_menu.add_command(label="Save", command=lambda: save_txt(False), accelerator="Ctrl+s")
 file_menu.add_command(label="Save as", command=save_as_txt)
 file_menu.add_separator()
+file_menu.add_command(label="Print file", command=lambda: print_file(False))
+file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)
 
-root.bind("<Control-Key-n>", new_txt)
-root.bind("<Control-Key-o>", open_txt)
-root.bind("<Control-Key-s>", save_txt)
+textbox.bind("<Control-Key-n>", new_txt)
+textbox.bind("<Control-Key-o>", open_txt)
+textbox.bind("<Control-Key-s>", save_txt)
+textbox.bind("<Control-Key-p>", print_file)
 
 selected = None
 def cut_txt(event):
