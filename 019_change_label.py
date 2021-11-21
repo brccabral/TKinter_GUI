@@ -1,3 +1,6 @@
+# this is not the correct way to change a label
+# need to use "label.config(text='')"
+# in future examples we start to use .config()
 import tkinter as tk
 import os
 from tkinter.constants import DISABLED, NORMAL
