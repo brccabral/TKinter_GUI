@@ -42,6 +42,9 @@ class TkinterApp:
         self.tree.heading("ID", text="ID", anchor=CENTER)
         self.tree.heading("Topping", text="Topping", anchor=W)
 
+        self.tree.tag_configure('oddrow', background="silver")
+        self.tree.tag_configure('evenrow', background="lightblue")
+
         self.tree.pack(pady=20)
 
         self.insert_frame = Frame(self.root)
@@ -110,8 +113,9 @@ class TkinterApp:
         if iid is None:
             iid = next(self.iid)
 
+        tag = 'evenrow' if iid % 2 == 0 else 'oddrow'
         self.tree.insert(parent=parent, index=index, iid=iid,
-                         text=text, values=(name, id, topping))
+                         text=text, values=(name, id, topping), tags=tag)
 
     def start(self):
         self.root.mainloop()
