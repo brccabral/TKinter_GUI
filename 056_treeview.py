@@ -24,15 +24,20 @@ class TkinterApp:
 
         self.iid = count()
 
+        self.style = ttk.Style()
+        self.style.theme_use("clam")
+        self.style.configure(self.appname, background="silver", foreground="black", rowheight=25, fieldbackground="grey")
+        self.style.map(self.appname, background=[('selected', 'green')])
+
         self.tree = ttk.Treeview(self.root)
 
         self.tree.config(columns=("Name", "ID", "Topping"))
-        self.tree.column("#0", width=0, stretch=NO)  # used for Parent/Children
+        self.tree.column("#0", width=20, stretch=NO)  # used for Parent/Children
         self.tree.column("Name", anchor=W, width=140)
         self.tree.column("ID", anchor=CENTER, width=100)
         self.tree.column("Topping", anchor=W, width=140)
 
-        self.tree.heading("#0", text="Label", anchor=W)
+        self.tree.heading("#0", text="", anchor=W)
         self.tree.heading("Name", text="Name", anchor=W)
         self.tree.heading("ID", text="ID", anchor=CENTER)
         self.tree.heading("Topping", text="Topping", anchor=W)
@@ -113,7 +118,7 @@ class TkinterApp:
 
 
 def main():
-    app = TkinterApp("Treeview", 500, 600)
+    app = TkinterApp("Treeview", 600, 600)
     app.insert_data("John", 1, "Pepperoni")
     app.insert_data("Mary", 2, "Cheese")
     app.insert_data("Tina", 3, "Ham")
