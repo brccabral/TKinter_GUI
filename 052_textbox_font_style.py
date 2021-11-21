@@ -135,7 +135,7 @@ label.config(text=f"{select_button.cget('text')=}")
 print(tkFont.names())
 print('')
 defaultFont = tkFont.nametofont('TkDefaultFont')
-print(defaultFont.actual())
+print(defaultFont.actual()) # {'family': 'DejaVu Sans', 'size': 10, 'weight': 'normal', 'slant': 'roman', 'underline': 0, 'overstrike': 0}
 print('')
 
 print(list(tkFont.families()))
