@@ -80,6 +80,14 @@ class TkinterApp:
             self.root, text="Insert record", command=self.insert_record)
         self.insert_button.pack(pady=10)
 
+        self.update_button = Button(
+            self.root, text="Update record", command=self.update_record)
+        self.update_button.pack(pady=10)
+
+        self.select_button = Button(
+            self.root, text="Select record", command=self.select_record)
+        self.select_button.pack(pady=10)
+
         self.remove_all_button = Button(
             self.root, text="Remove all", command=self.remove_all)
         self.remove_all_button.pack(pady=10)
@@ -91,6 +99,41 @@ class TkinterApp:
         self.remove_many_button = Button(
             self.root, text="Remove many", command=self.remove_many)
         self.remove_many_button.pack(pady=10)
+
+    def update_record(self):
+        selected = self.tree.focus()
+        if not selected:
+            logging.debug(f'no selection')
+            return
+        
+        if not self.name_entry.get() or not self.id_entry.get() or not self.topping_entry.get():
+            messagebox.showerror("Treeview", "One or more entries is blank")
+            return
+
+        name = self.name_entry.get()
+        id = self.id_entry.get()
+        topping = self.topping_entry.get()
+
+        self.tree.item(selected, values=(name, id, topping))
+
+        self.name_entry.delete(0, END)
+        self.id_entry.delete(0, END)
+        self.topping_entry.delete(0, END)
+
+    def select_record(self):
+        selected = self.tree.focus()
+        if not selected:
+            logging.debug(f'no selection')
+            return
+        
+        self.name_entry.delete(0, END)
+        self.id_entry.delete(0, END)
+        self.topping_entry.delete(0, END)
+
+        name, id, topping = self.tree.item(selected, 'values')
+        self.name_entry.insert(0, name)
+        self.id_entry.insert(0, id)
+        self.topping_entry.insert(0, topping)
 
     def remove_all(self):
         for record in self.tree.get_children():
@@ -125,7 +168,10 @@ class TkinterApp:
         if iid is None:
             iid = next(self.iid)
         
-        tag = 'evenrow' if len(self.tree.get_children()) % 2 == 0 else 'oddrow'
+        if parent:
+            tag = self.tree.item(parent, 'tag')
+        else:
+            tag = 'evenrow' if len(self.tree.get_children()) % 2 == 0 else 'oddrow'
         self.tree.insert(parent=parent, index=index, iid=iid,
                          text=text, values=(name, id, topping), tags=tag)
 
@@ -134,7 +180,7 @@ class TkinterApp:
 
 
 def main():
-    app = TkinterApp("Treeview", 600, 600)
+    app = TkinterApp("Treeview", 600, 700)
     app.insert_data("John", 1, "Pepperoni")
     app.insert_data("Mary", 2, "Cheese")
     app.insert_data("Tina", 3, "Ham")
@@ -142,8 +188,8 @@ def main():
     app.insert_data("Erin", 5, "Cheese")
     app.insert_data("Wes", 6, "Onion")
     app.insert_data("Steve", 1.2, "Peppers", parent=0, index=0)
-    app.insert_data("Lara", 2.2, "Corn", parent=1, index=0)
     app.insert_data("John", 1, "Pepperoni")
+    app.insert_data("Lara", 2.2, "Corn", parent=1, index=0)
     app.insert_data("Mary", 2, "Cheese")
     app.insert_data("Tina", 3, "Ham")
     app.insert_data("Bob", 4, "Supreme")
