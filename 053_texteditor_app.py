@@ -270,6 +270,45 @@ redo_button.grid(row=0, column=4, padx=5)
 color_text_button = Button(buttons_frame, text="Color selected", command=color_text)
 color_text_button.grid(row=0, column=5, padx=5)
 
+def color_theme(main_color, second_color, text_color):
+    root.config(background=main_color)
+    status_bar.config(bg=main_color, fg=text_color)
+    textbox.config(bg=second_color, fg=text_color)
+    buttons_frame.config(bg=main_color)
+    bold_button.config(bg=main_color, fg=text_color)
+    italic_button.config(bg=main_color, fg=text_color)
+    roman_button.config(bg=main_color, fg=text_color)
+    color_text_button.config(bg=main_color, fg=text_color)
+    redo_button.config(bg=main_color, fg=text_color)
+    undo_button.config(bg=main_color, fg=text_color)
+    menu.config(bg=main_color, fg=text_color)
+    file_menu.config(bg=main_color, fg=text_color)
+    edit_menu.config(bg=main_color, fg=text_color)
+    font_menu.config(bg=main_color, fg=text_color)
+    options_menu.config(bg=main_color, fg=text_color)
+    text_scroll.config(bg=main_color)
+    horizontal_scroll.config(bg=main_color)
+
+def night_on():
+    print( bold_button.cget("background"))
+
+    main_color = "#000000"
+    second_color = "#373737"
+    text_color = "green"
+    color_theme(main_color, second_color, text_color)
+
+def night_off():
+    main_color = "#d9d9d9"
+    second_color = "white"
+    text_color = "black"
+    color_theme(main_color, second_color, text_color)
+
+options_menu = Menu(menu, tearoff=False)
+menu.add_cascade(label="Options", menu=options_menu)
+options_menu.add_command(label="Night Mode On", command=night_on)
+options_menu.add_command(label="Night Mode Off", command=night_off)
+
+
 # PhotoImage can't open .jpg, use Pillow for .jpg
 image = PhotoImage(file="images/star.png")
 
