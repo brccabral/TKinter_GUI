@@ -1,8 +1,8 @@
-from tkinter import messagebox
+from tkinter import Scrollbar, messagebox
 import tkinter as tk
 from tkinter import Button, Entry, Frame, Label, ttk
 import os
-from tkinter.constants import CENTER, END, NO, W
+from tkinter.constants import BROWSE, CENTER, END, NO, NONE, RIGHT, W, Y
 from itertools import count
 from typing import Union
 import logging
@@ -26,13 +26,25 @@ class TkinterApp:
 
         self.style = ttk.Style()
         self.style.theme_use("clam")
-        self.style.configure(self.appname, background="silver", foreground="black", rowheight=25, fieldbackground="grey")
+        self.style.configure(self.appname, background="silver",
+                             foreground="black", rowheight=25, fieldbackground="grey")
         self.style.map(self.appname, background=[('selected', 'green')])
 
-        self.tree = ttk.Treeview(self.root)
+        self.tree_frame = Frame(self.root)
+        self.tree_frame.pack(pady=10)
+
+        self.tree_scroll = Scrollbar(self.tree_frame)
+        self.tree_scroll.pack(side=RIGHT, fill=Y)
+
+        self.tree = ttk.Treeview(self.tree_frame, yscrollcommand=self.tree_scroll.set)
+        # self.tree.config(selectmode=NONE) # disables selection
+        # self.tree.config(selectmode=BROWSE) # allows select only one item
+
+        self.tree_scroll.config(command=self.tree.yview)
 
         self.tree.config(columns=("Name", "ID", "Topping"))
-        self.tree.column("#0", width=20, stretch=NO)  # used for Parent/Children
+        # used for Parent/Children
+        self.tree.column("#0", width=20, stretch=NO)
         self.tree.column("Name", anchor=W, width=140)
         self.tree.column("ID", anchor=CENTER, width=100)
         self.tree.column("Topping", anchor=W, width=140)
@@ -45,7 +57,7 @@ class TkinterApp:
         self.tree.tag_configure('oddrow', background="silver")
         self.tree.tag_configure('evenrow', background="lightblue")
 
-        self.tree.pack(pady=20)
+        self.tree.pack()
 
         self.insert_frame = Frame(self.root)
         self.insert_frame.pack(pady=10)
@@ -112,8 +124,8 @@ class TkinterApp:
     def insert_data(self, name: str, id: Union[str, int], topping: str, parent="", index=END, iid: int = None, text=""):
         if iid is None:
             iid = next(self.iid)
-
-        tag = 'evenrow' if iid % 2 == 0 else 'oddrow'
+        
+        tag = 'evenrow' if len(self.tree.get_children()) % 2 == 0 else 'oddrow'
         self.tree.insert(parent=parent, index=index, iid=iid,
                          text=text, values=(name, id, topping), tags=tag)
 
@@ -131,6 +143,30 @@ def main():
     app.insert_data("Wes", 6, "Onion")
     app.insert_data("Steve", 1.2, "Peppers", parent=0, index=0)
     app.insert_data("Lara", 2.2, "Corn", parent=1, index=0)
+    app.insert_data("John", 1, "Pepperoni")
+    app.insert_data("Mary", 2, "Cheese")
+    app.insert_data("Tina", 3, "Ham")
+    app.insert_data("Bob", 4, "Supreme")
+    app.insert_data("Erin", 5, "Cheese")
+    app.insert_data("Wes", 6, "Onion")
+    app.insert_data("John", 1, "Pepperoni")
+    app.insert_data("Mary", 2, "Cheese")
+    app.insert_data("Tina", 3, "Ham")
+    app.insert_data("Bob", 4, "Supreme")
+    app.insert_data("Erin", 5, "Cheese")
+    app.insert_data("Wes", 6, "Onion")
+    app.insert_data("John", 1, "Pepperoni")
+    app.insert_data("Mary", 2, "Cheese")
+    app.insert_data("Tina", 3, "Ham")
+    app.insert_data("Bob", 4, "Supreme")
+    app.insert_data("Erin", 5, "Cheese")
+    app.insert_data("Wes", 6, "Onion")
+    app.insert_data("John", 1, "Pepperoni")
+    app.insert_data("Mary", 2, "Cheese")
+    app.insert_data("Tina", 3, "Ham")
+    app.insert_data("Bob", 4, "Supreme")
+    app.insert_data("Erin", 5, "Cheese")
+    app.insert_data("Wes", 6, "Onion")
     app.start()
 
 
