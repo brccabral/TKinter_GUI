@@ -19,12 +19,16 @@ class TkinterApp:
         self.root.geometry(
             f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
 
+        self.label = tk.Label(
+            self.root, text=f"{screen_width=} {screen_height}")
+        self.label.pack(pady=10)
+
     def start(self):
         self.root.mainloop()
 
 
 def main():
-    app = TkinterApp("TkinterApp", 500, 800)
+    app = TkinterApp("Center App", 500, 500)
     app.start()
 
 
