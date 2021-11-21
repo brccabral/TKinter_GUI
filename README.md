@@ -42,6 +42,15 @@ Module mutagen is used to get the length of the sound
 _To use Excel_
 
     pip install openpyxl
+
+
+_Code 058 needs pandas, numpy, xlrd_  
+**xlrd is needed to open old Excel format .xls.** Don't need to install it if you are not going to work with .xls
+
+    pip install pandas
+    pip install numpy
+    pip install xlrd
+
 ___ 
 # Assets
 
