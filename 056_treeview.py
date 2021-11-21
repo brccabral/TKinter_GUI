@@ -1,4 +1,4 @@
-from tkinter import Scrollbar, messagebox
+from tkinter import Event, Scrollbar, messagebox
 import tkinter as tk
 from tkinter import Button, Entry, Frame, Label, ttk
 import os
@@ -99,6 +99,15 @@ class TkinterApp:
         self.remove_many_button = Button(
             self.root, text="Remove many", command=self.remove_many)
         self.remove_many_button.pack(pady=10)
+
+        # self.tree.bind("<Double-1>", func=self.clicker)
+        # the Button-1 gets called before focus(), so, nothing is selected yet
+        # need to be ButtonRelease-1
+        # self.tree.bind("<Button-1>", func=self.clicker)
+        self.tree.bind("<ButtonRelease-1>", func=self.clicker)
+
+    def clicker(self, event: Event):
+        self.select_record()
 
     def update_record(self):
         selected = self.tree.focus()
