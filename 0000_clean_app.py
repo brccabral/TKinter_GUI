@@ -3,15 +3,12 @@ import os
 
 
 class TkinterApp:
-    def __init__(self, appname="TkinterApp", width=400, heigth=400):
+    def __init__(self, appname="TkinterApp", width=400, height=400):
         self.appname = appname
         self.width = width
-        self.height = heigth
+        self.height = height
 
         self.root = tk.Tk()
-
-        screen_width = self.root.winfo_screenwidth()
-        screen_height = self.root.winfo_screenheight()
 
         self.root.title(self.appname)
         if os.name == "nt":
@@ -20,11 +17,15 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
         self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
 
-        self.root.geometry(
-            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
-
     def start(self):
+        self.center_window()
         self.root.mainloop()
+
+    def center_window(self):
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        self.root.geometry(
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
 
 
 def main():
