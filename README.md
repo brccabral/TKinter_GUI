@@ -51,6 +51,11 @@ _Code 058 needs pandas, numpy, xlrd_
     pip install numpy
     pip install xlrd
 
+_To use PDF_
+
+The tutorial teaches PyPDF2, but this is not maintained. Use pymupdf
+
+    pip install pymupdf
 ___ 
 # Assets
 
