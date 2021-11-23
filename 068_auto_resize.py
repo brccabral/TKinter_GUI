@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 from tkinter.constants import NSEW
+import tkinter.font as tkFont
 
 
 class TkinterApp:
@@ -22,11 +23,18 @@ class TkinterApp:
         self.button2 = tk.Button(self.root, text="Button 2")
         self.button1.grid(row=0, column=0, sticky=NSEW)
         self.button2.grid(row=1, column=0, sticky=NSEW)
-        
+
         # self.root.grid_rowconfigure((0,1), weight=1)
         self.root.grid_rowconfigure(0, weight=2)
         self.root.grid_rowconfigure(1, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
+
+        self.root.bind("<Configure>", self.resize)
+
+    def resize(self, event: tk.Event):
+        size = event.width // 10
+        default_font = tkFont.nametofont('TkDefaultFont')
+        default_font.config(size=size)
 
     def start(self):
         self.center_window()
