@@ -61,18 +61,23 @@ ___
 
 1. Star icon
     * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    * <a href="https://www.flaticon.com/free-icon/star_1828884?related_id=1828884">https://www.flaticon.com/free-icon/star_1828884?related_id=1828884</a>
+    * https://www.flaticon.com/free-icon/star_1828884?related_id=1828884
     * I have resized the icon to 48x48
   
 
 2. Song Orchestral
     * <div>Song made by <a href="www.youtube.com/c/Tadon" title="www.youtube.com/c/Tadon">www.youtube.com/c/Tadon</a> from <a href="https://opengameart.org/content/forward-operating-base/" title="opengameart.org">opengameart.org</a></div>
-    * <a href="https://opengameart.org/content/forward-operating-base">https://opengameart.org/content/forward-operating-base</a>
-    * <a href="https://opengameart.org/content/first-snowfall">https://opengameart.org/content/first-snowfall</a>
+    * https://opengameart.org/content/forward-operating-base
+    * https://opengameart.org/content/first-snowfall
 
 3. Music player icons
     * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    * <a href="https://www.flaticon.com/packs/music-225">https://www.flaticon.com/packs/music-225</a>
+    * https://www.flaticon.com/packs/music-225
 
 4. CAM logo
     * https://atletico.com.br/paginas/simbolos-e-marcas
+
+5. Bell icon
+    * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    * https://www.flaticon.com/free-icon/bell_1827422?term=bell&page=1&position=11&page=1&position=11&related_id=1827422&origin=search
+    * I have resized the icon to 150x150
