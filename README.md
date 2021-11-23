@@ -73,3 +73,6 @@ ___
 3. Music player icons
     * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     * <a href="https://www.flaticon.com/packs/music-225">https://www.flaticon.com/packs/music-225</a>
+
+4. CAM logo
+    * https://atletico.com.br/paginas/simbolos-e-marcas
