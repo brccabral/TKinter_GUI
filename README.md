@@ -56,6 +56,11 @@ _To use PDF_
 The tutorial teaches PyPDF2, but this is not maintained. Use pymupdf
 
     pip install pymupdf
+
+_To do HTML parser using beautiful soup_
+
+    pip install beautifulsoup4
+
 ___ 
 # Assets
 
@@ -76,8 +81,14 @@ ___
 
 4. CAM logo
     * https://atletico.com.br/paginas/simbolos-e-marcas
+    * I resized it to 398x600
 
 5. Bell icon
     * <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     * https://www.flaticon.com/free-icon/bell_1827422?term=bell&page=1&position=11&page=1&position=11&related_id=1827422&origin=search
     * I have resized the icon to 150x150
+
+6. Bitcoin icon
+    * <div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    * https://www.flaticon.com/free-icon/bitcoin_893071?term=bitcoin&page=1&position=3&page=1&position=3&related_id=893071
+    * I have resized the icon to 128x128
