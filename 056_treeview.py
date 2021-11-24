@@ -1,6 +1,7 @@
-from tkinter import Event, Scrollbar, messagebox
+from configparser import ConfigParser
+from tkinter import Event, Menu, Scrollbar, messagebox
 import tkinter as tk
-from tkinter import Button, Entry, Frame, Label, ttk
+from tkinter import Button, Entry, Frame, Label, ttk, colorchooser
 import os
 from tkinter.constants import BROWSE, CENTER, END, NO, NONE, RIGHT, W, Y
 from itertools import count
@@ -11,6 +12,37 @@ logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s
 
 
 class TkinterApp:
+
+    def change_color_oddrow(self):
+        rgb, color_hex = colorchooser.askcolor()
+        if not color_hex:
+            return
+        self.tree.tag_configure('oddrow', background=color_hex)
+        self.configurations.set('color', 'oddrow', color_hex)
+
+        with open(self.config_file, 'w') as configfile:
+            self.configurations.write(configfile)
+
+    def change_color_evenrow(self):
+        rgb, color_hex = colorchooser.askcolor()
+        if not color_hex:
+            return
+        self.tree.tag_configure('evenrow', background=color_hex)
+        self.configurations.set('color', 'evenrow', color_hex)
+
+        with open(self.config_file, 'w') as configfile:
+            self.configurations.write(configfile)
+
+    def change_color_selectedrow(self):
+        rgb, color_hex = colorchooser.askcolor()
+        if not color_hex:
+            return
+        self.style.map(self.appname, background=[('selected', color_hex)])
+        self.configurations.set('color', 'selectedrow', color_hex)
+
+        with open(self.config_file, 'w') as configfile:
+            self.configurations.write(configfile)
+
     def __init__(self, appname="TkinterApp", width=400, heigth=400):
         self.root = tk.Tk()
         self.appname = appname
@@ -22,13 +54,34 @@ class TkinterApp:
         self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
         self.root.geometry(f"{width}x{heigth}")
 
+        self.config_file = "treeview.ini"
+        self.configurations = ConfigParser()
+        self.configurations.read(self.config_file)
+        oddrow_color = self.configurations.get('color', 'oddrow')
+        evenrow_color = self.configurations.get('color', 'evenrow')
+        selectedrow_color = self.configurations.get('color', 'selectedrow')
+
+        self.menu = Menu(self.root)
+        self.root.config(menu=self.menu)
+        self.color_menu = Menu(self.menu, tearoff=False)
+        self.menu.add_cascade(label="Colors", menu=self.color_menu)
+        self.color_menu.add_command(
+            label='Change oddrow color', command=self.change_color_oddrow)
+        self.color_menu.add_command(
+            label='Change evenrow color', command=self.change_color_evenrow)
+        self.color_menu.add_command(
+            label='Change selectedrow color', command=self.change_color_selectedrow)
+        self.color_menu.add_separator()
+        self.color_menu.add_command(label="Exit", command=self.root.quit)
+
         self.iid = count()
 
         self.style = ttk.Style()
         self.style.theme_use("clam")
         self.style.configure(self.appname, background="silver",
                              foreground="black", rowheight=25, fieldbackground="grey")
-        self.style.map(self.appname, background=[('selected', 'green')])
+        self.style.map(self.appname, background=[
+                       ('selected', selectedrow_color)])
 
         self.tree_frame = Frame(self.root)
         self.tree_frame.pack(pady=10)
@@ -55,8 +108,8 @@ class TkinterApp:
         self.tree.heading("ID", text="ID", anchor=CENTER)
         self.tree.heading("Topping", text="Topping", anchor=W)
 
-        self.tree.tag_configure('oddrow', background="silver")
-        self.tree.tag_configure('evenrow', background="lightblue")
+        self.tree.tag_configure('oddrow', background=oddrow_color)
+        self.tree.tag_configure('evenrow', background=evenrow_color)
 
         self.tree.pack()
 
@@ -142,7 +195,6 @@ class TkinterApp:
         # need reversed() in case two selections are in sequence
         for row in reversed(rows):
             self.tree.move(row, self.tree.parent(row), self.tree.index(row)+1)
-
 
     def clicker(self, event: Event):
         self.select_record()
