@@ -35,7 +35,7 @@ def mouse_wheel_units(event: Event):
     canvas.yview("scroll", -1 if event.num==4 else 1, "units")
 
 # Add a scrollbar to the Canvas
-scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=scroll_canvas)
+scrollbar = ttk.Scrollbar(canvas, orient=VERTICAL, command=scroll_canvas)
 scrollbar.pack(side=RIGHT, fill=Y)
 
 
@@ -50,7 +50,7 @@ else:
     canvas.bind("<Button-5>", mouse_wheel_units)
 
 # Create ANOTHER Frame inside the Canvas
-work_frame = Frame(canvas)
+work_frame = Frame(canvas, background="red")
 
 # Add that new Frame to a window in the Canvas
 canvas.create_window((0,0), window=work_frame, anchor=NW)

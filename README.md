@@ -61,6 +61,9 @@ _To do HTML parser using beautiful soup_
 
     pip install beautifulsoup4
 
+_To add HTML tags_
+
+    pip install tkhtmlview
 ___ 
 # Assets
 
