@@ -13,10 +13,10 @@ else:
 root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
 root.geometry("600x400")
 
-my_progress = ttk.Progressbar(root, orient=HORIZONTAL, length=300, mode="determinate")
+my_progress = ttk.Progressbar(root, value=0, orient=HORIZONTAL, length=300, mode="determinate")
 my_progress.pack(pady=10)
 
-my_progress2 = ttk.Progressbar(root, orient=HORIZONTAL, length=300, mode="indeterminate")
+my_progress2 = ttk.Progressbar(root, value=0, orient=HORIZONTAL, length=300, mode="indeterminate")
 my_progress2.pack(pady=10)
 
 def step_progress():
