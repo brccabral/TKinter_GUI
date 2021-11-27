@@ -64,6 +64,11 @@ _To do HTML parser using beautiful soup_
 _To add HTML tags_
 
     pip install tkhtmlview
+
+_To do screenshot_
+
+    pip install mss
+
 ___ 
 # Assets
 
