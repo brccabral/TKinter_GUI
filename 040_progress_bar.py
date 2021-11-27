@@ -29,6 +29,19 @@ progress_value = DoubleVar()
 my_progress3.config(variable=progress_value)
 
 
+# Control Progressbar with Scale and a variable
+my_progress4 = ttk.Progressbar(
+    root, value=0, orient=HORIZONTAL, length=300, maximum=20.0, mode="determinate")
+# use a variable to control Progressbar
+my_progress4.pack(pady=10)
+scale_progress_value = DoubleVar()
+my_progress4.config(variable=scale_progress_value)
+
+scale = ttk.Scale(root, orient = HORIZONTAL,
+		  length = 300, variable = scale_progress_value,
+		  from_ = 0.0, to = 20.0)
+scale.pack(pady=10)
+
 def step_progress():
     my_progress['value'] += 20
     my_progress2['value'] += 20
