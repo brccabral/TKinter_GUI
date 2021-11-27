@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Button, Canvas, Event, Frame, ttk
+from tkinter import Button, Canvas, Event, ttk
 import os
 from tkinter.constants import BOTH, LEFT, NW, RIGHT, VERTICAL, Y
 import logging
