@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter.constants import ACTIVE, ANCHOR, END, SEL
+from tkinter.constants import ANCHOR, END
 import logging
 
 logging.basicConfig(

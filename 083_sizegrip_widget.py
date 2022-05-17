@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
 from tkinter import ttk
-from tkinter.constants import EW, NSEW, NW, SE, SW, TOP
+from tkinter.constants import NSEW, NW, TOP
 
 
 class TkinterApp:

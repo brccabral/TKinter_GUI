@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter.constants import ANCHOR, NW
+from tkinter.constants import NW
 
 root = tk.Tk()
 root.title("TKinter GUI")

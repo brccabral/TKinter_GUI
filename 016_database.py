@@ -183,7 +183,7 @@ def update_record():
     c = conn.cursor()
 
     c.execute(
-        """UPDATE addresses set 
+        """UPDATE addresses set
         first_name = :first,
         last_name = :last,
         address = :address,

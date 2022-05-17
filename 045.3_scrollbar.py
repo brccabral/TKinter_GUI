@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
 from tkinter.constants import BOTH, BOTTOM, HORIZONTAL, LEFT, NW, RIGHT, VERTICAL, X, Y
-from tkinter import Event, ttk
+from tkinter import Event
 
 # Scrollbar can work with these widgets
 

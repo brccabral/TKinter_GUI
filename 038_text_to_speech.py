@@ -50,9 +50,9 @@ def talk():
     engine = pyttsx3.init(driverName="espeak", debug=True)
     # on terminal
     # this lists the languages only
-    ## espeak --voices=
+    # # espeak --voices=
     # with the language we can check the available voices (female/different accents)
-    ## espeak --voices=en
+    # # espeak --voices=en
     engine.setProperty("voice", "us-mbrola-1")
     engine.setProperty("rate", 150)
     engine.say(my_entry.get())

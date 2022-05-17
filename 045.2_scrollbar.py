@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import Button, Canvas, Event, ttk
 import os
-from tkinter.constants import BOTH, LEFT, NW, RIGHT, VERTICAL, Y
+from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
 import logging
 
 logging.basicConfig(

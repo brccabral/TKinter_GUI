@@ -1,5 +1,5 @@
 import tkinter as tk
-import os, sys
+import os
 from tkinter import (
     Button,
     Event,
@@ -28,13 +28,13 @@ from tkinter.constants import (
 )
 import tkinter.font as tkFont
 import logging
+import _tkinter
 
 logging.basicConfig(
     format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
     datefmt="%H:%M:%S",
     level=logging.DEBUG,
 )
-import _tkinter
 
 root = tk.Tk()
 appname = "Textpad"
@@ -174,11 +174,11 @@ def print_file(event):
         ),
     )
     if not filename:
-        logging.debug(f"no file selected to print")
+        logging.debug("no file selected to print")
     if os.name == "nt":
         printer_name = win32print.GetDefaultPrinter()
         if not printer_name:
-            logging.debug(f"printer not found")
+            logging.debug("printer not found")
             return
         win32api.ShellExecute(0, "print", filename, None, ".", 0)
     else:
@@ -307,7 +307,7 @@ def font_event(event: Event):
 
 def change_font(tag_name, color_hex=None):
     if not textbox.tag_ranges(SEL):
-        logging.debug(f"no text selected")
+        logging.debug("no text selected")
         return
     current_tags = textbox.tag_names(SEL_FIRST)
     if tag_name == "colored":

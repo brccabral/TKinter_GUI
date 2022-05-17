@@ -2,6 +2,7 @@ import tkinter as tk
 import os
 import platform
 
+
 class TkinterApp:
     def __init__(self, appname="TkinterApp", width=400, height=400):
         self.appname = appname
@@ -15,7 +16,7 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         info = f"System: {platform.system()}\n \
         User Name: {platform.node()}\n \
@@ -34,7 +35,6 @@ class TkinterApp:
 
         self.label = tk.Label(self.root, text=info, font="-size 14")
         self.label.pack(padx=5, pady=5)
-        
 
     def start(self):
         self.center_window()
@@ -44,7 +44,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

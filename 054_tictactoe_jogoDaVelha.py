@@ -4,13 +4,13 @@ from itertools import cycle
 from tkinter import Button, Menu, messagebox
 from tkinter.constants import DISABLED, NORMAL
 from tkinter.font import Font
+import os
 
 logging.basicConfig(
     format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
     datefmt="%H:%M:%S",
     level=logging.DEBUG,
 )
-import os
 
 
 class TicTacToe:
@@ -89,7 +89,7 @@ class TicTacToe:
         self.b9.config(state=DISABLED)
 
     def b_click(self, button: tk.Button):
-        logging.debug(f"clicked")
+        logging.debug("clicked")
         if button["text"] == " ":
             button["text"] = self.turn
             if self.check_winner():

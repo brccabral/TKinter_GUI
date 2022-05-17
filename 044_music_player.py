@@ -3,7 +3,7 @@ from tkinter import Event, Frame, IntVar, Label, LabelFrame, Menu, filedialog, t
 import os
 from tkinter.constants import (
     ACTIVE,
-    ANCHOR,
+    # ANCHOR,
     BOTTOM,
     CENTER,
     DISABLED,
@@ -11,8 +11,8 @@ from tkinter.constants import (
     END,
     GROOVE,
     HORIZONTAL,
-    N,
-    S,
+    # N,
+    # S,
     VERTICAL,
     W,
     X,
@@ -137,7 +137,7 @@ def forward_command():
 
 def stop_command():
     global is_paused, is_playing
-    logging.debug(f"Stop")
+    logging.debug("Stop")
     status_bar.after_cancel(status_bar_after)
     pygame.mixer.music.stop()
     song_box.select_clear(ACTIVE)

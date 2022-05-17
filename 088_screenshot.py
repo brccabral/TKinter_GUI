@@ -28,7 +28,7 @@ class TkinterApp:
 
     def take_screenshot(self):
         with mss.mss() as sct:
-            filename = sct.shot(output="output.png")
+            _ = sct.shot(output="output.png")
             # filename = sct.shot(output="output.png", mon=-1) # mon=-1 to save multiple monitors
             self.label.config(text="Screen Shot has been saved")
 

@@ -43,18 +43,18 @@ def leaveButton(event: tk.Event):
 
 
 def focusInButton(event: tk.Event):
-    myLabel = tk.Label(root, text=f"You focus in button 1")
+    myLabel = tk.Label(root, text="You focus in button 1")
     myLabel.pack()
     myLabel.after(1, resize_root, myLabel)
 
 
 def focusOutButton(event: tk.Event):
-    myLabel = tk.Label(root, text=f"You focus out button 1")
+    myLabel = tk.Label(root, text="You focus out button 1")
     myLabel.pack()
 
 
 def returnButton(event: tk.Event):
-    myLabel = tk.Label(root, text=f"You pressed enter button 1")
+    myLabel = tk.Label(root, text="You pressed enter button 1")
     myLabel.pack()
     myLabel.after(1, resize_root, myLabel)
 

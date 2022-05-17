@@ -79,7 +79,7 @@ class TkinterApp:
         self.listbox.delete(0, END)
 
     def save_file(self):
-        logging.debug(f"save")
+        logging.debug("save")
         content = self.text.get(1.0, END)
         if not content:
             return
@@ -92,7 +92,7 @@ class TkinterApp:
             pickle.dump(content, f)
 
     def open_file(self):
-        logging.debug(f"open")
+        logging.debug("open")
         filename = filedialog.askopenfilename(
             initialdir=".", filetypes=(("DAT files", "*.dat"),)
         )

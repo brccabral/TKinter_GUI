@@ -42,31 +42,31 @@ class TkinterApp:
     def load_data(self):
         self.filename = self.file_open()
         if not self.filename:
-            logging.debug(f"no file selected")
+            logging.debug("no file selected")
             return
         logging.debug(f"{self.filename}")
         if not self.read_data():
-            logging.debug(f"no data")
+            logging.debug("no data")
             return
         self.clear_tree()
         self.setup_tree()
 
     def file_open(self):
-        logging.debug(f"file_open")
+        logging.debug("file_open")
         filename = filedialog.askopenfilename(
             initialdir=".",
             title="Open a .xls",
             filetypes=(("xlss files", "*.xlsx"), ("xls files", "*.xls")),
         )
         if not filename:
-            logging.debug(f"no file selected")
+            logging.debug("no file selected")
             return False
         # r string to avoid backslash \ escape
         filename = r"{}".format(filename)
         return filename
 
     def read_data(self):
-        logging.debug(f"read_data")
+        logging.debug("read_data")
         try:
             self.df = pd.read_excel(self.filename)
             logging.debug(f"{self.df.head()}")

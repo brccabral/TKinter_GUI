@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter import Button, Label, font, IntVar, StringVar
+from tkinter import Button, Label, IntVar, StringVar
 
 root = tk.Tk()
 root.title("TKinter GUI")

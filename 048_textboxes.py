@@ -1,6 +1,6 @@
 import tkinter as tk
 import os
-from tkinter import Button, Frame, Label, font
+from tkinter import Button, Frame, Label
 from tkinter.constants import END
 
 root = tk.Tk()

@@ -3,7 +3,16 @@ from tkinter import Event, Menu, Scrollbar, messagebox
 import tkinter as tk
 from tkinter import Button, Entry, Frame, Label, ttk, colorchooser
 import os
-from tkinter.constants import BROWSE, CENTER, END, NO, NONE, RIGHT, W, Y
+from tkinter.constants import (
+    # BROWSE,
+    CENTER,
+    END,
+    NO,
+    # NONE,
+    RIGHT,
+    W,
+    Y,
+)
 from itertools import count
 from typing import Union
 import logging
@@ -197,7 +206,7 @@ class TkinterApp:
     def move_up(self):
         rows = self.tree.selection()
         if not rows:
-            logging.debug(f"nothing selected")
+            logging.debug("nothing selected")
             return
 
         for row in rows:
@@ -206,7 +215,7 @@ class TkinterApp:
     def move_down(self):
         rows = self.tree.selection()
         if not rows:
-            logging.debug(f"nothing selected")
+            logging.debug("nothing selected")
             return
 
         # need reversed() in case two selections are in sequence
@@ -219,7 +228,7 @@ class TkinterApp:
     def update_record(self):
         selected = self.tree.focus()
         if not selected:
-            logging.debug(f"no selection")
+            logging.debug("no selection")
             return
 
         if (
@@ -243,7 +252,7 @@ class TkinterApp:
     def select_record(self):
         selected = self.tree.focus()
         if not selected:
-            logging.debug(f"no selection")
+            logging.debug("no selection")
             return
 
         self.name_entry.delete(0, END)
@@ -261,14 +270,14 @@ class TkinterApp:
 
     def remove_one(self):
         if not self.tree.selection():
-            logging.debug(f"no selection")
+            logging.debug("no selection")
             return
         record = self.tree.selection()[0]
         self.tree.delete(record)
 
     def remove_many(self):
         if not self.tree.selection():
-            logging.debug(f"no selection")
+            logging.debug("no selection")
             return
         for record in self.tree.selection():
             self.tree.delete(record)

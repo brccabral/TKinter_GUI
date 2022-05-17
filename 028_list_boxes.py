@@ -2,9 +2,9 @@ import tkinter as tk
 import os
 from tkinter.constants import (
     ANCHOR,
-    BROWSE,
+    # BROWSE,
     END,
-    EXTENDED,
+    # EXTENDED,
     MULTIPLE,
     RIGHT,
     VERTICAL,
@@ -25,11 +25,11 @@ my_frame = tk.Frame(root)
 my_scrollbar = tk.Scrollbar(my_frame, orient=VERTICAL)
 # select mode = SINGLE, BROWSE, MULTIPLE, EXTENDED
 # MULTIPLE = normal mouse click to select multiple
-##   ANCHOR doesn't work
-##   use my_listbox.curselection() to return indexes of selected items
+# #   ANCHOR doesn't work
+# #   use my_listbox.curselection() to return indexes of selected items
 # EXTENDED = can select multiple as long as they are in sequence
-##   ANCHOR is the first item in the extended list, even if reversed
-##   use my_listbox.curselection() to return indexes of selected items
+# #   ANCHOR is the first item in the extended list, even if reversed
+# #   use my_listbox.curselection() to return indexes of selected items
 # BROWSE = need another function to use it
 my_listbox = tk.Listbox(
     my_frame, width=50, yscrollcommand=my_scrollbar.set, selectmode=MULTIPLE

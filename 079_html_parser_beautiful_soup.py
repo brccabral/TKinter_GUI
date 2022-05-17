@@ -70,7 +70,7 @@ class TkinterApp:
             self.status_bar.config(text=f"Last updated {current_time}")
             current_price = float(bit_price.replace(",", ""))
             if self.previous == current_price:
-                logging.debug(f"same price")
+                logging.debug("same price")
                 pass
             elif self.previous > current_price:
                 self.bit_label.config(fg="red")

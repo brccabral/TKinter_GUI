@@ -4,8 +4,8 @@ import tkinter as tk
 import os
 import random
 import logging
-from tkinter.constants import DISABLED, FLAT, GROOVE, NORMAL, RIDGE
-from typing import List, Union
+from tkinter.constants import DISABLED, NORMAL, RIDGE
+from typing import List
 
 logging.basicConfig(
     format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
@@ -58,20 +58,20 @@ class TkinterApp:
     def select_matches(self, button: MatchButton):
         logging.debug(f"{button.value=}")
         if button["text"] != " ":
-            logging.debug(f"button already selected")
+            logging.debug("button already selected")
 
         button["text"] = button.value
         if not self.current_selection:
             self.current_selection = button
         else:
             if button.value == self.current_selection.value:
-                logging.debug(f"correct")
+                logging.debug("correct")
                 button["text"] = button.value
                 button["state"] = DISABLED
                 self.current_selection["state"] = DISABLED
                 self.current_selection = None
             else:
-                logging.debug(f"wrong")
+                logging.debug("wrong")
                 messagebox.showerror(f"{self.appname}", "Not a match")
                 button["text"] = " "
                 self.current_selection["text"] = " "
@@ -81,7 +81,7 @@ class TkinterApp:
             if b["state"] == NORMAL:
                 break
         else:
-            logging.debug(f"winner")
+            logging.debug("winner")
             self.player_win()
 
     def player_win(self):
@@ -115,7 +115,7 @@ class TkinterApp:
                 font=("DejaVu Sans", 20),
                 height=3,
                 width=4,
-                relief=RIDGE,
+                relief=RIDGE,  # FLAT, GROOVE
             )
             button.set_value(m)
             # use "lambda x=x: FUNC(x)" so that lambda creates different
@@ -128,7 +128,7 @@ class TkinterApp:
     def put_matches(self):
         total = len(self.buttons)
         if not total:
-            logging.debug(f"no button")
+            logging.debug("no button")
             return
         if total % 2 != 0:
             logging.debug(f"Size must be even, given {total}")
@@ -150,9 +150,9 @@ class TkinterApp:
         # check if there are buttons left-over and add them to
         # a new row
         if rows * columns < total:
-            for l in range(total - rows * columns):
+            for c in range(total - rows * columns):
                 button = self.buttons[b]
-                button.grid(row=r + 1, column=l, ipadx=5, ipady=5)
+                button.grid(row=r + 1, column=c, ipadx=5, ipady=5)
                 b += 1
 
         self.width = columns * 200

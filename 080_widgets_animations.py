@@ -1,14 +1,14 @@
 import tkinter as tk
 import os
 import logging
-from tkinter import Button, Widget, font
+from tkinter import Button, font
+import _tkinter
 
 logging.basicConfig(
     format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
     datefmt="%H:%M:%S",
     level=logging.DEBUG,
 )
-import _tkinter
 
 
 class AnimatedButton(Button):
@@ -19,7 +19,7 @@ class AnimatedButton(Button):
         logging.debug(f"{self.original_font_size=}")
 
     def animate(self):
-        logging.debug(f"animate")
+        logging.debug("animate")
         self.original_pady = self.pack_info()["pady"]
         logging.debug(f"{self.original_pady=}")
         # self.font['size'] = 8

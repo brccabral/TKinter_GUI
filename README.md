@@ -39,6 +39,9 @@ Module mutagen is used to get the length of the sound
     pip install pygame
     pip install mutagen
 
+    pip install pydub
+    pip install simpleaudio
+
 _To use Excel_
 
     pip install openpyxl

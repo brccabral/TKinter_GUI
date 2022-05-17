@@ -5,12 +5,14 @@ from tkinter.constants import END, INSERT, RIGHT, SEL_FIRST, SEL_LAST, Y
 import tkinter.font as tkFont
 import logging
 
+# get Tcl exceptions
+import _tkinter
+
 logging.basicConfig(
     format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
     datefmt="%H:%M:%S",
     level=logging.DEBUG,
 )
-import _tkinter
 
 root = tk.Tk()
 root.title("TKinter GUI")

@@ -21,7 +21,7 @@ def myDelete():
         if myLabel.winfo_exists() == 1:
             myLabel.destroy()
             myButton["state"] = NORMAL
-    except:
+    except Exception:
         pass
 
 

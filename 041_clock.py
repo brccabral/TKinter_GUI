@@ -1,7 +1,6 @@
 import tkinter as tk
 import os
 import time
-from tkinter import font
 
 root = tk.Tk()
 root.title("TKinter GUI")

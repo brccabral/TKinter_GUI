@@ -48,7 +48,7 @@ class TkinterApp:
             initialdir=".", title="Open PDF file", filetypes=(("PDF files", "*.pdf"),)
         )
         if not filename:
-            logging.debug(f"no file selected")
+            logging.debug("no file selected")
             return
         logging.debug(f"{filename=}")
         doc: pymupdf.Document

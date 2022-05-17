@@ -15,19 +15,19 @@ root.config(menu=my_menu)
 
 
 def our_command():
-    my_label = tk.Label(root, text="You clicked").pack()
+    tk.Label(root, text="You clicked").pack()
 
 
 def file_new():
     hide_all_frames()
     file_new_frame.pack(fill="both", expand=1)
-    my_label = tk.Label(file_new_frame, text="You file new").pack()
+    tk.Label(file_new_frame, text="You file new").pack()
 
 
 def edit_cut():
     hide_all_frames()
     edit_cut_frame.pack(fill="both", expand=1)
-    my_label = tk.Label(edit_cut_frame, text="You edit cut").pack()
+    tk.Label(edit_cut_frame, text="You edit cut").pack()
 
 
 def hide_all_frames():

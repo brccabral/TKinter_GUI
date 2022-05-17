@@ -3,7 +3,8 @@
 # in future examples we start to use .config()
 import tkinter as tk
 import os
-from tkinter.constants import DISABLED, NORMAL
+
+# from tkinter.constants import DISABLED, NORMAL
 
 root = tk.Tk()
 root.title("TKinter GUI")

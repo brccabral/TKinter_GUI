@@ -25,7 +25,7 @@ horizontal.pack(anchor=W)
 
 
 def show_hor():
-    my_horizontal = tk.Label(root, text=horizontal.get()).pack()
+    tk.Label(root, text=horizontal.get()).pack()
     root.geometry(str(horizontal.get()) + "x400")
 
 
