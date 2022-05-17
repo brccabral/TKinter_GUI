@@ -63,6 +63,9 @@ _To do HTML parser using beautiful soup_
 
 _To add HTML tags_
 
+To install tkhtmlview, need to install "requests" first
+
+    pip install requests
     pip install tkhtmlview
 
 _To do screenshot_
