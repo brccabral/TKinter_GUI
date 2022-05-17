@@ -18,12 +18,23 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
         self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
+        # frame to hold map
         self.label_frame = tk.LabelFrame(self.root)
         self.label_frame.pack(padx=5, pady=5)
 
+        # map widget
         self.map_widget = tkmap.TkinterMapView(
             self.label_frame, width=800, height=600, corner_radius=0
         )
+
+        # set coordinates
+        # self.map_widget.set_position(36.1699, -115.1396)  # Vegas
+
+        # set address
+        self.map_widget.set_address("Space Needle, Seattle WA, US")
+        # set zoom
+        self.map_widget.set_zoom(10)
+
         self.map_widget.pack()
 
     def start(self):
