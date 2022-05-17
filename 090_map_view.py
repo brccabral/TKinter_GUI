@@ -1,6 +1,8 @@
 import tkinter as tk
+from tkinter import HORIZONTAL
 import os
 import tkintermapview as tkmap
+from tkinter import ttk
 
 
 class TkinterApp:
@@ -46,8 +48,23 @@ class TkinterApp:
         self.button = tk.Button(self.input_frame, text="Lookup", command=self.lookup)
         self.button.grid(row=0, column=1, padx=10)
 
+        self.scale = ttk.Scale(
+            self.input_frame,
+            from_=2,
+            to=20,
+            orient=HORIZONTAL,
+            command=self.zoom_slide,
+            value=10,
+            length=220,
+        )
+        self.scale.grid(row=0, column=2, padx=10)
+
     def lookup(self):
-        pass
+        self.map_widget.set_address(self.entry.get())
+        self.scale.config(value=9)
+
+    def zoom_slide(self, e: tk.Event):
+        self.map_widget.set_zoom(self.scale.get())
 
     def start(self):
         self.center_window()
