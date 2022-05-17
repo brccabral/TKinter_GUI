@@ -20,7 +20,7 @@ class TkinterApp:
 
         # frame to hold map
         self.label_frame = tk.LabelFrame(self.root)
-        self.label_frame.pack(padx=5, pady=5)
+        self.label_frame.pack(padx=10, pady=10)
 
         # map widget
         self.map_widget = tkmap.TkinterMapView(
@@ -37,6 +37,18 @@ class TkinterApp:
 
         self.map_widget.pack()
 
+        self.input_frame = tk.LabelFrame(self.root)
+        self.input_frame.pack(padx=10, pady=10)
+
+        self.entry = tk.Entry(self.input_frame, font=("Helvetica", 28))
+        self.entry.grid(row=0, column=0, pady=20, padx=10)
+
+        self.button = tk.Button(self.input_frame, text="Lookup", command=self.lookup)
+        self.button.grid(row=0, column=1, padx=10)
+
+    def lookup(self):
+        pass
+
     def start(self):
         self.center_window()
         self.root.mainloop()
@@ -50,7 +62,7 @@ class TkinterApp:
 
 
 def main():
-    app = TkinterApp("TkinterApp", 700, 500)
+    app = TkinterApp("TkinterApp", 900, 800)
     app.start()
 
 
