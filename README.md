@@ -75,7 +75,13 @@ _To do screenshot_
 
     pip install mss
 
+
+_To use map view_
+
+    pip3 install tkintermapview
+
 ___ 
+
 # Assets
 
 1. Star icon
