@@ -16,14 +16,16 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
-        self.button = tk.Button(self.root, text='Take a screenshot', command=self.take_screenshot)
+        self.button = tk.Button(
+            self.root, text="Take a screenshot", command=self.take_screenshot
+        )
         self.button.pack(padx=5, pady=5)
-        
-        self.label = tk.Label(self.root, text='')
+
+        self.label = tk.Label(self.root, text="")
         self.label.pack(padx=5, pady=5)
-        
+
     def take_screenshot(self):
         with mss.mss() as sct:
             filename = sct.shot(output="output.png")
@@ -38,7 +40,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

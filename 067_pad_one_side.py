@@ -18,10 +18,11 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         self.root.geometry(
-            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
+            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}"
+        )
 
         self.root.config(bg="blue")
 
@@ -29,22 +30,31 @@ class TkinterApp:
         # padx=(left, right)
         # pady=(top, bottom)
 
-        self.label = tk.Label(self.root, text="Hello World 1",
-                              bg="white",
-                              fg="black",
-                              font=('DejaVu Sans', 20))
+        self.label = tk.Label(
+            self.root,
+            text="Hello World 1",
+            bg="white",
+            fg="black",
+            font=("DejaVu Sans", 20),
+        )
         self.label.grid(row=0, column=0, pady=(50, 0))
 
-        self.label2 = tk.Label(self.root, text="Hello World 2",
-                               bg="white",
-                               fg="black",
-                               font=('DejaVu Sans', 20))
+        self.label2 = tk.Label(
+            self.root,
+            text="Hello World 2",
+            bg="white",
+            fg="black",
+            font=("DejaVu Sans", 20),
+        )
         self.label2.grid(row=0, column=1, padx=(10, 0))
 
-        self.label3 = tk.Label(self.root, text="Hello World 3",
-                               bg="white",
-                               fg="black",
-                               font=('DejaVu Sans', 20))
+        self.label3 = tk.Label(
+            self.root,
+            text="Hello World 3",
+            bg="white",
+            fg="black",
+            font=("DejaVu Sans", 20),
+        )
         self.label3.grid(row=0, column=2)
 
     def start(self):

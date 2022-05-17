@@ -12,23 +12,37 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
 
         self.root.geometry(
-            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
+            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}"
+        )
 
         demo_text = "Stuff\nStuff Stuff\nStuff Stuff Stuff"
-        label = tk.Label(self.root, text=demo_text, font=(
-            'DejaVu Sans', 18), bd=1, relief=SUNKEN)
+        label = tk.Label(
+            self.root, text=demo_text, font=("DejaVu Sans", 18), bd=1, relief=SUNKEN
+        )
         label.pack(pady=10)
-        label = tk.Label(self.root, text=demo_text, font=(
-            'DejaVu Sans', 18), bd=1, relief=SUNKEN, justify=LEFT)
+        label = tk.Label(
+            self.root,
+            text=demo_text,
+            font=("DejaVu Sans", 18),
+            bd=1,
+            relief=SUNKEN,
+            justify=LEFT,
+        )
         label.pack(pady=10)
-        label = tk.Label(self.root, text=demo_text, font=(
-            'DejaVu Sans', 18), bd=1, relief=SUNKEN, justify=RIGHT)
+        label = tk.Label(
+            self.root,
+            text=demo_text,
+            font=("DejaVu Sans", 18),
+            bd=1,
+            relief=SUNKEN,
+            justify=RIGHT,
+        )
         label.pack(pady=10)
 
     def start(self):

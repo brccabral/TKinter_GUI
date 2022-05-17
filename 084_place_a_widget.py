@@ -16,17 +16,15 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
-        self.button = tk.Button(self.root, text='Sample')
+        self.button = tk.Button(self.root, text="Sample")
         self.button.pack(padx=5, pady=5)
 
-        self.button2 = tk.Button(
-            self.root, text='Click me')
+        self.button2 = tk.Button(self.root, text="Click me")
         self.button2.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-        self.button3 = tk.Button(
-            self.root, text='X Y')
+        self.button3 = tk.Button(self.root, text="X Y")
         self.button3.place(x=100, y=50)
 
     def start(self):
@@ -37,7 +35,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

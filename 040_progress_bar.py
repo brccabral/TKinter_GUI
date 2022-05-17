@@ -10,19 +10,22 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("600x400")
 
 my_progress = ttk.Progressbar(
-    root, value=0, orient=HORIZONTAL, length=300, mode="determinate")
+    root, value=0, orient=HORIZONTAL, length=300, mode="determinate"
+)
 my_progress.pack(pady=10)
 
 my_progress2 = ttk.Progressbar(
-    root, value=0, orient=HORIZONTAL, length=300, mode="indeterminate")
+    root, value=0, orient=HORIZONTAL, length=300, mode="indeterminate"
+)
 my_progress2.pack(pady=10)
 
 my_progress3 = ttk.Progressbar(
-    root, value=0, orient=HORIZONTAL, length=300, maximum=20.0, mode="determinate")
+    root, value=0, orient=HORIZONTAL, length=300, maximum=20.0, mode="determinate"
+)
 # use a variable to control Progressbar
 my_progress3.pack(pady=10)
 progress_value = DoubleVar()
@@ -31,30 +34,37 @@ my_progress3.config(variable=progress_value)
 
 # Control Progressbar with Scale and a variable
 my_progress4 = ttk.Progressbar(
-    root, value=0, orient=HORIZONTAL, length=300, maximum=20.0, mode="determinate")
+    root, value=0, orient=HORIZONTAL, length=300, maximum=20.0, mode="determinate"
+)
 # use a variable to control Progressbar
 my_progress4.pack(pady=10)
 scale_progress_value = DoubleVar()
 my_progress4.config(variable=scale_progress_value)
 
-scale = ttk.Scale(root, orient = HORIZONTAL,
-		  length = 300, variable = scale_progress_value,
-		  from_ = 0.0, to = 20.0)
+scale = ttk.Scale(
+    root,
+    orient=HORIZONTAL,
+    length=300,
+    variable=scale_progress_value,
+    from_=0.0,
+    to=20.0,
+)
 scale.pack(pady=10)
 
+
 def step_progress():
-    my_progress['value'] += 20
-    my_progress2['value'] += 20
-    progress_value.set(progress_value.get()+1.5)
-    my_label.config(text=my_progress['value'])
+    my_progress["value"] += 20
+    my_progress2["value"] += 20
+    progress_value.set(progress_value.get() + 1.5)
+    my_label.config(text=my_progress["value"])
 
 
 def auto_progress():
     for x in range(5):
-        my_progress['value'] += 20
-        my_progress2['value'] += 20
-        progress_value.set(progress_value.get()+1.5)
-        my_label.config(text=my_progress['value'])
+        my_progress["value"] += 20
+        my_progress2["value"] += 20
+        progress_value.set(progress_value.get() + 1.5)
+        my_label.config(text=my_progress["value"])
         root.update_idletasks()
         time.sleep(1)
 

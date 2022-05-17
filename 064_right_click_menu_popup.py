@@ -11,13 +11,14 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
 
         self.root.geometry(
-            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
+            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}"
+        )
 
         self.right_click_menu = tk.Menu(self.root, tearoff=False)
         self.right_click_menu.add_command(label="Say hello", command=self.hello)
@@ -27,7 +28,7 @@ class TkinterApp:
 
         self.root.bind("<Button-3>", self.open_right_click)
 
-        self.label = tk.Label(self.root, text="",font=('DejaVu Sans', 32))
+        self.label = tk.Label(self.root, text="", font=("DejaVu Sans", 32))
         self.label.pack(pady=10)
 
     def open_right_click(self, event: tk.Event):

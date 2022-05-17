@@ -14,12 +14,14 @@ class TkinterApp:
 
         self.splash_root.title(f"{self.appname} Loading")
         self.splash_root.geometry(
-            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
+            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}"
+        )
 
         self.splash_root.overrideredirect(True)
 
         self.label = tk.Label(
-            self.splash_root, text="Splash screen!", font=('DejaVu Sans', 32))
+            self.splash_root, text="Splash screen!", font=("DejaVu Sans", 32)
+        )
         self.label.pack(pady=10)
 
         # do something that takes a long time (database loading, user login, internet connection)
@@ -37,13 +39,13 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
-        self.label = tk.Label(self.root, text="Main window",
-                              font=('DejaVu Sans', 32))
+        self.label = tk.Label(self.root, text="Main window", font=("DejaVu Sans", 32))
         self.label.pack(pady=10)
 
     def start(self):

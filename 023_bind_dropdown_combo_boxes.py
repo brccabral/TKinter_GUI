@@ -8,30 +8,26 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("400x400")
+
 
 def clicked():
     myLabel = tk.Label(root, text=f"Clicked {dropVar.get()}")
     myLabel.pack()
 
+
 def selected(event):
     myLabel = tk.Label(root, text=f"Selected {dropVar.get()}")
     myLabel.pack()
+
 
 def comboclick(event):
     myLabel = tk.Label(root, text=f"Combo {myCombo.get()}")
     myLabel.pack()
 
-options = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Satuday",
-    "Sunday"
-]
+
+options = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satuday", "Sunday"]
 
 dropVar = tk.StringVar()
 dropVar.set(options[0])

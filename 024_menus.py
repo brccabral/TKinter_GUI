@@ -7,24 +7,28 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("400x400")
 
 my_menu = tk.Menu(root)
 root.config(menu=my_menu)
 
+
 def our_command():
     my_label = tk.Label(root, text="You clicked").pack()
+
 
 def file_new():
     hide_all_frames()
     file_new_frame.pack(fill="both", expand=1)
     my_label = tk.Label(file_new_frame, text="You file new").pack()
 
+
 def edit_cut():
     hide_all_frames()
     edit_cut_frame.pack(fill="both", expand=1)
     my_label = tk.Label(edit_cut_frame, text="You edit cut").pack()
+
 
 def hide_all_frames():
     # remove anything inside the frame
@@ -32,9 +36,10 @@ def hide_all_frames():
         widget.destroy()
     for widget in edit_cut_frame.winfo_children():
         widget.destroy()
-    
+
     file_new_frame.pack_forget()
     edit_cut_frame.pack_forget()
+
 
 file_menu = tk.Menu(my_menu)
 my_menu.add_cascade(label="File", menu=file_menu)

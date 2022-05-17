@@ -1,6 +1,15 @@
 import tkinter as tk
 import os
-from tkinter.constants import ANCHOR, BROWSE, END, EXTENDED, MULTIPLE, RIGHT, VERTICAL, Y
+from tkinter.constants import (
+    ANCHOR,
+    BROWSE,
+    END,
+    EXTENDED,
+    MULTIPLE,
+    RIGHT,
+    VERTICAL,
+    Y,
+)
 
 root = tk.Tk()
 root.title("TKinter GUI")
@@ -8,7 +17,7 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("600x800")
 
 # without scrollbar the list can be scrolled, but user won't notice
@@ -22,7 +31,9 @@ my_scrollbar = tk.Scrollbar(my_frame, orient=VERTICAL)
 ##   ANCHOR is the first item in the extended list, even if reversed
 ##   use my_listbox.curselection() to return indexes of selected items
 # BROWSE = need another function to use it
-my_listbox = tk.Listbox(my_frame, width=50, yscrollcommand=my_scrollbar.set, selectmode=MULTIPLE)
+my_listbox = tk.Listbox(
+    my_frame, width=50, yscrollcommand=my_scrollbar.set, selectmode=MULTIPLE
+)
 my_scrollbar.config(command=my_listbox.yview)
 my_scrollbar.pack(side=RIGHT, fill=Y)
 my_frame.pack()
@@ -42,15 +53,19 @@ for i in range(50):
 
 my_listbox.insert(4, "New item")
 
+
 def delete():
     my_listbox.delete(ANCHOR)
-    my_label.config(text='')
+    my_label.config(text="")
+
 
 def select():
     my_label.config(text=my_listbox.get(ANCHOR))
 
+
 def delete_all():
     my_listbox.delete(0, END)
+
 
 # used with MULTIPLE
 def select_all():
@@ -59,10 +74,12 @@ def select_all():
         result.append(f"{item}={my_listbox.get(item)}")
     my_label.config(text="\n".join(result))
 
+
 def delete_multiple():
     # need reversed because at each delete all indexes change
     for item in reversed(my_listbox.curselection()):
         my_listbox.delete(item)
+
 
 my_button = tk.Button(root, text="Delete single", command=delete)
 my_button.pack(pady=10)
@@ -70,7 +87,7 @@ my_button.pack(pady=10)
 my_button2 = tk.Button(root, text="Show single selected", command=select)
 my_button2.pack(pady=10)
 
-my_label = tk.Label(root, text='')
+my_label = tk.Label(root, text="")
 my_label.pack(pady=5)
 
 my_button3 = tk.Button(root, text="Delete all", command=delete_all)

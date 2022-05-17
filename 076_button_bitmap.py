@@ -1,8 +1,12 @@
 import tkinter as tk
 import os
 import logging
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s',
-                    datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 
 class TkinterApp:
@@ -18,18 +22,33 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
-        self.bitmaps = ["error", "gray75", "gray50", "gray12",
-                        "hourglass", "info", "questhead", "question", "warning"]
+        self.bitmaps = [
+            "error",
+            "gray75",
+            "gray50",
+            "gray12",
+            "hourglass",
+            "info",
+            "questhead",
+            "question",
+            "warning",
+        ]
 
         for bitmap in self.bitmaps:
-            button = tk.Button(self.root, bitmap=bitmap, fg="red",
-                               command=lambda b=bitmap: self.function_name(b), width=50, height=50)
+            button = tk.Button(
+                self.root,
+                bitmap=bitmap,
+                fg="red",
+                command=lambda b=bitmap: self.function_name(b),
+                width=50,
+                height=50,
+            )
             button.pack(padx=5, pady=5)
 
     def function_name(self, bitmap):
-        logging.debug(f'{bitmap=}')
+        logging.debug(f"{bitmap=}")
 
     def start(self):
         self.center_window()
@@ -39,7 +58,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

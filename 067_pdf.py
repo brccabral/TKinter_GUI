@@ -4,8 +4,12 @@ from tkinter.constants import END
 import fitz as pymupdf  # fitz is pymupdf
 from tkinter import Menu, filedialog
 import logging
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s',
-                    datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 
 class TkinterApp:
@@ -21,7 +25,7 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         self.text = tk.Text(self.root, height=30, width=60)
         self.text.pack(pady=10)
@@ -41,16 +45,17 @@ class TkinterApp:
 
     def open_file(self):
         filename = filedialog.askopenfilename(
-            initialdir=".", title="Open PDF file", filetypes=(("PDF files", "*.pdf"),))
+            initialdir=".", title="Open PDF file", filetypes=(("PDF files", "*.pdf"),)
+        )
         if not filename:
-            logging.debug(f'no file selected')
+            logging.debug(f"no file selected")
             return
-        logging.debug(f'{filename=}')
+        logging.debug(f"{filename=}")
         doc: pymupdf.Document
         with pymupdf.open(filename) as doc:
             text = ""
             for page in doc:
-                logging.debug(f'{page}')
+                logging.debug(f"{page}")
                 # text += page.get_textpage().extractText()
                 text += page.get_text()
 
@@ -64,7 +69,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

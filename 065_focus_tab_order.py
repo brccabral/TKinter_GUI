@@ -11,19 +11,20 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
 
         self.root.geometry(
-            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}")
+            f"{width}x{heigth}+{screen_width//2-width//2}+{screen_height//2-heigth//2}"
+        )
 
         # without "focus()", the definition order, not the pack(), is
         # the focus order
-        self.white = tk.Entry(self.root, bg="white", font=('DejaVu Sans', 20))
-        self.red = tk.Entry(self.root, bg="red", font=('DejaVu Sans', 20))
-        self.blue = tk.Entry(self.root, bg="blue", font=('DejaVu Sans', 20))
+        self.white = tk.Entry(self.root, bg="white", font=("DejaVu Sans", 20))
+        self.red = tk.Entry(self.root, bg="red", font=("DejaVu Sans", 20))
+        self.blue = tk.Entry(self.root, bg="blue", font=("DejaVu Sans", 20))
 
         self.white.pack(pady=10)
         self.red.pack(pady=10)
@@ -31,7 +32,7 @@ class TkinterApp:
 
         # this sets the first focus, but the order is still the definition order
         self.red.focus()
-        
+
         # use liff() to set the order you need
         self.set_focus_order()
 

@@ -3,8 +3,12 @@ import os
 from tkinter import Event, Frame, Listbox, ttk
 import logging
 from tkinter.constants import ANCHOR, END
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s',
-                    datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 
 class TkinterApp:
@@ -20,22 +24,21 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
-        self.size_colors = {"Small": ["Red", "Green", "Blue", "Black"],
-                            "Medium": ["Red", "Green"],
-                            "Large": ["Blue", "Black"]
-                            }
+        self.size_colors = {
+            "Small": ["Red", "Green", "Blue", "Black"],
+            "Medium": ["Red", "Green"],
+            "Large": ["Blue", "Black"],
+        }
 
-        self.size_combo = ttk.Combobox(
-            self.root, values=list(self.size_colors.keys()))
+        self.size_combo = ttk.Combobox(self.root, values=list(self.size_colors.keys()))
         self.size_combo.current(0)
         self.size_combo.pack(pady=20)
 
         self.size_combo.bind("<<ComboboxSelected>>", self.combo_selected)
 
-        self.color_combo = ttk.Combobox(
-            self.root, values=self.size_colors["Small"])
+        self.color_combo = ttk.Combobox(self.root, values=self.size_colors["Small"])
         self.color_combo.current(0)
         self.color_combo.pack(pady=20)
 
@@ -71,7 +74,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

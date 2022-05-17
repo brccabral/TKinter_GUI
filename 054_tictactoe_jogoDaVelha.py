@@ -4,8 +4,14 @@ from itertools import cycle
 from tkinter import Button, Menu, messagebox
 from tkinter.constants import DISABLED, NORMAL
 from tkinter.font import Font
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s', datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 import os
+
 
 class TicTacToe:
     def __init__(self):
@@ -16,9 +22,9 @@ class TicTacToe:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
         self.add_buttons()
-        self.players = cycle('XO')
+        self.players = cycle("XO")
         self.turn = next(self.players)
         self.count = 0
 
@@ -27,7 +33,7 @@ class TicTacToe:
         self.options_menu = Menu(self.menu, tearoff=False)
         self.menu.add_cascade(label="Options", menu=self.options_menu)
         self.options_menu.add_command(label="Reset Game", command=self.reset_game)
-    
+
     def reset_game(self):
         self.b1.config(text=" ", bg="gray", state=NORMAL)
         self.b2.config(text=" ", bg="gray", state=NORMAL)
@@ -41,13 +47,17 @@ class TicTacToe:
         self.count = 0
 
     def check_sequence(self, ba: Button, bb: Button, bc: Button):
-        if not ba['text'] == " " and ba['text'] == bb['text'] and bb['text'] == bc['text']:
+        if (
+            not ba["text"] == " "
+            and ba["text"] == bb["text"]
+            and bb["text"] == bc["text"]
+        ):
             ba.config(bg="red")
             bb.config(bg="red")
             bc.config(bg="red")
             return True
         return False
-    
+
     def check_winner(self):
         if self.check_sequence(self.b1, self.b2, self.b3):
             return True
@@ -66,7 +76,7 @@ class TicTacToe:
         elif self.check_sequence(self.b3, self.b5, self.b7):
             return True
         return False
-    
+
     def disable_buttons(self):
         self.b1.config(state=DISABLED)
         self.b2.config(state=DISABLED)
@@ -79,9 +89,9 @@ class TicTacToe:
         self.b9.config(state=DISABLED)
 
     def b_click(self, button: tk.Button):
-        logging.debug(f'clicked')
-        if button['text'] == " ":
-            button['text'] = self.turn
+        logging.debug(f"clicked")
+        if button["text"] == " ":
+            button["text"] = self.turn
             if self.check_winner():
                 messagebox.showinfo(self.appname, f"{self.turn} WON!")
                 self.disable_buttons()
@@ -96,15 +106,87 @@ class TicTacToe:
 
     def add_buttons(self):
         font = Font(self.root, size=20)
-        self.b1 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b1))
-        self.b2 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b2))
-        self.b3 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b3))
-        self.b4 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b4))
-        self.b5 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b5))
-        self.b6 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b6))
-        self.b7 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b7))
-        self.b8 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b8))
-        self.b9 = tk.Button(self.root, text=" ", font=font, height=3, width=6, bg="gray", command=lambda: self.b_click(self.b9))
+        self.b1 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b1),
+        )
+        self.b2 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b2),
+        )
+        self.b3 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b3),
+        )
+        self.b4 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b4),
+        )
+        self.b5 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b5),
+        )
+        self.b6 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b6),
+        )
+        self.b7 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b7),
+        )
+        self.b8 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b8),
+        )
+        self.b9 = tk.Button(
+            self.root,
+            text=" ",
+            font=font,
+            height=3,
+            width=6,
+            bg="gray",
+            command=lambda: self.b_click(self.b9),
+        )
 
         self.b1.grid(row=0, column=0)
         self.b2.grid(row=0, column=1)
@@ -118,6 +200,7 @@ class TicTacToe:
 
     def start(self):
         self.root.mainloop()
+
 
 if __name__ == "__main__":
     app = TicTacToe()

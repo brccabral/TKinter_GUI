@@ -2,8 +2,12 @@ import tkinter as tk
 import os
 from tkinter.constants import ACTIVE, ANCHOR, END, SEL
 import logging
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s',
-                    datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 
 class TkinterApp:
@@ -19,9 +23,9 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
-        self.label = tk.Label(self.root, text='Start typing')
+        self.label = tk.Label(self.root, text="Start typing")
         self.label.pack(padx=5, pady=5)
 
         self.entry = tk.Entry(self.root)
@@ -29,8 +33,15 @@ class TkinterApp:
 
         self.entry.bind("<KeyRelease>", self.search_list)
 
-        self.toppings = ["Pepperoni", "Peppers",
-                         "Mushrooms", "Cheese", "Onions", "Ham", "Taco"]
+        self.toppings = [
+            "Pepperoni",
+            "Peppers",
+            "Mushrooms",
+            "Cheese",
+            "Onions",
+            "Ham",
+            "Taco",
+        ]
         self.listbox = tk.Listbox(self.root)
         self.listbox.pack(padx=5, pady=5)
         self.listbox.bind("<<ListboxSelect>>", self.fill_entry)
@@ -64,7 +75,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

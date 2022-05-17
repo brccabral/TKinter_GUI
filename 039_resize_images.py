@@ -1,4 +1,5 @@
 import tkinter as tk
+
 # tkinter doesn't work with jpg
 from PIL import ImageTk, Image
 import os
@@ -9,7 +10,7 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("400x400")
 
 
@@ -22,7 +23,7 @@ my_label.pack(pady=20)
 
 # below here we resize the image on the fly
 my_pic = Image.open("images/0.jpg")
-resized = my_pic.resize((160,160), Image.ANTIALIAS)
+resized = my_pic.resize((160, 160), Image.ANTIALIAS)
 
 my_img2 = ImageTk.PhotoImage(resized)
 my_label2 = tk.Label(root, image=my_img2)

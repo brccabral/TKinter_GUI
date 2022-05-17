@@ -1,19 +1,39 @@
 import tkinter as tk
 from tkinter import Event, Frame, IntVar, Label, LabelFrame, Menu, filedialog, ttk
 import os
-from tkinter.constants import ACTIVE, ANCHOR, BOTTOM, CENTER, DISABLED, E, END, GROOVE, HORIZONTAL, N, S, VERTICAL, W, X
+from tkinter.constants import (
+    ACTIVE,
+    ANCHOR,
+    BOTTOM,
+    CENTER,
+    DISABLED,
+    E,
+    END,
+    GROOVE,
+    HORIZONTAL,
+    N,
+    S,
+    VERTICAL,
+    W,
+    X,
+)
 import pygame
 import time
 from mutagen.mp3 import MP3
 import logging
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s', datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 # need to call pygame.init() instead of pygame.mixer.init()
 # because we need to use pygame.USEREVENT to then use pygame.mixer.music.set_endevent()
 # and it needs to be called before tk.Tk()
 pygame.init()
 # pygame.mixer.init()
-MUSIC_END = pygame.USEREVENT+1
+MUSIC_END = pygame.USEREVENT + 1
 pygame.mixer.music.set_endevent(MUSIC_END)
 
 root = tk.Tk()
@@ -22,7 +42,7 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("700x450")
 
 master_frame = Frame(root)
@@ -31,16 +51,20 @@ master_frame.pack(pady=20)
 song_box = tk.Listbox(master_frame, bg="black", fg="green", width=70)
 song_box.grid(row=0, column=0, pady=10)
 
+
 def set_slider_volume(event: Event):
-    logging.debug(f'{volume_slider.get()=}')
+    logging.debug(f"{volume_slider.get()=}")
     pygame.mixer.music.set_volume(volume_slider.get())
-    volume_label.config(text=int(100*volume_slider.get()))
+    volume_label.config(text=int(100 * volume_slider.get()))
+
 
 volume_frame = LabelFrame(master_frame, text="Volume")
 volume_frame.grid(row=0, column=1, padx=10)
 
 # ttk.Scale() moves slider smoothly, while tk.Scale() moves in integer intervals
-volume_slider = ttk.Scale(volume_frame, value=1, from_=0, to=1, orient=VERTICAL, length=150)
+volume_slider = ttk.Scale(
+    volume_frame, value=1, from_=0, to=1, orient=VERTICAL, length=150
+)
 volume_slider.grid(row=0, column=0, padx=10, pady=5)
 volume_slider.bind("<ButtonRelease-1>", set_slider_volume)
 
@@ -61,6 +85,8 @@ current_song_index = None
 is_playing = False
 song_length = None
 slider_start_position = None
+
+
 def play_song(item, start_pos):
     global is_playing, is_paused, song_length, slider_start_position
     song = song_list[item]
@@ -69,23 +95,25 @@ def play_song(item, start_pos):
     is_playing = True
     is_paused = False
     pause_btn.config(image=pause_img)
-    
+
     # select based on back and forward buttons
-    song_box.selection_clear(0, END) 
+    song_box.selection_clear(0, END)
     song_box.activate(item)
     song_box.selection_set(item, last=None)
 
     song_length = MP3(song).info.length
     slider.config(state=ACTIVE, to=song_length)
     slider_start_position = start_pos
-    logging.debug(f'play_song {time.time()}')
+    logging.debug(f"play_song {time.time()}")
     get_play_time()
+
 
 def play_command():
     global current_song_index
     if song_box.curselection():
         current_song_index = song_box.curselection()[0]
         play_song(current_song_index, 0)
+
 
 def back_command():
     global current_song_index
@@ -96,18 +124,20 @@ def back_command():
     current_song_index -= 1
     play_song(current_song_index, 0)
 
+
 def forward_command():
     global current_song_index
     if current_song_index is None:
         return
-    if current_song_index >= len(song_list)-1:
+    if current_song_index >= len(song_list) - 1:
         return
     current_song_index += 1
     play_song(current_song_index, 0)
 
+
 def stop_command():
     global is_paused, is_playing
-    logging.debug(f'Stop')
+    logging.debug(f"Stop")
     status_bar.after_cancel(status_bar_after)
     pygame.mixer.music.stop()
     song_box.select_clear(ACTIVE)
@@ -118,7 +148,10 @@ def stop_command():
     set_slide(0)
     slider.config(state=DISABLED)
 
+
 is_paused = False
+
+
 def pause_command():
     global is_paused, is_playing
     if not is_playing:
@@ -132,11 +165,22 @@ def pause_command():
         is_paused = False
         pause_btn.config(image=pause_img)
 
-back_btn = tk.Button(controls_frame, borderwidth=0, image=back_img, command=back_command)
-play_btn = tk.Button(controls_frame, borderwidth=0, image=play_img, command=play_command)
-pause_btn = tk.Button(controls_frame, borderwidth=0, image=pause_img, command=pause_command)
-forward_btn = tk.Button(controls_frame, borderwidth=0, image=forward_img, command=forward_command)
-stop_btn = tk.Button(controls_frame, borderwidth=0, image=stop_img, command=stop_command)
+
+back_btn = tk.Button(
+    controls_frame, borderwidth=0, image=back_img, command=back_command
+)
+play_btn = tk.Button(
+    controls_frame, borderwidth=0, image=play_img, command=play_command
+)
+pause_btn = tk.Button(
+    controls_frame, borderwidth=0, image=pause_img, command=pause_command
+)
+forward_btn = tk.Button(
+    controls_frame, borderwidth=0, image=forward_img, command=forward_command
+)
+stop_btn = tk.Button(
+    controls_frame, borderwidth=0, image=stop_img, command=stop_command
+)
 
 back_btn.grid(row=0, column=0, padx=10)
 play_btn.grid(row=0, column=1, padx=10)
@@ -148,13 +192,24 @@ menu = tk.Menu(root)
 root.config(menu=menu)
 
 song_list = []
+
+
 def add_one_song():
-    song = filedialog.askopenfilename(initialdir="sounds", title="Choose audio file", filetypes=(("mp3 Files", "*.mp3"),))
+    song = filedialog.askopenfilename(
+        initialdir="sounds",
+        title="Choose audio file",
+        filetypes=(("mp3 Files", "*.mp3"),),
+    )
     song_list.append(song)
     song_box.insert(END, os.path.basename(song))
 
+
 def add_many_songs():
-    songs = filedialog.askopenfilenames(initialdir="sounds", title="Choose audio file", filetypes=(("mp3 Files", "*.mp3"),))
+    songs = filedialog.askopenfilenames(
+        initialdir="sounds",
+        title="Choose audio file",
+        filetypes=(("mp3 Files", "*.mp3"),),
+    )
     for song in songs:
         song_list.append(song)
         song_box.insert(END, os.path.basename(song))
@@ -165,13 +220,16 @@ menu.add_cascade(label="Add songs", menu=add_song_menu)
 add_song_menu.add_command(label="Add one song to playlist", command=add_one_song)
 add_song_menu.add_command(label="Add many songs to playlist", command=add_many_songs)
 
+
 def remove_item(item):
     song_box.delete(item, None)
+
 
 def remove_one_song():
     if song_box.curselection():
         remove_item(song_box.curselection()[0])
         stop_command()
+
 
 def remove_many_songs():
     if song_box.curselection():
@@ -179,51 +237,65 @@ def remove_many_songs():
             remove_item(item)
         stop_command()
 
+
 def remove_all_songs():
     song_box.delete(0, END)
     stop_command()
 
+
 remove_song_menu = Menu(menu)
 menu.add_cascade(label="Remove songs", menu=remove_song_menu)
-remove_song_menu.add_command(label="Delete one song from playlist", command=remove_one_song)
-remove_song_menu.add_command(label="Delete many songs from playlist", command=remove_many_songs)
-remove_song_menu.add_command(label="Delete all songs from playlist", command=remove_all_songs)
+remove_song_menu.add_command(
+    label="Delete one song from playlist", command=remove_one_song
+)
+remove_song_menu.add_command(
+    label="Delete many songs from playlist", command=remove_many_songs
+)
+remove_song_menu.add_command(
+    label="Delete all songs from playlist", command=remove_all_songs
+)
 
 status_bar_after = None
+
+
 def get_play_time():
     global status_bar_after
     if not is_playing:
-        logging.debug(f'Not playing {time.time()}')
+        logging.debug(f"Not playing {time.time()}")
         status_bar.after_cancel(status_bar_after)
         return
     for event in pygame.event.get():
         if event.type == MUSIC_END:
-            logging.debug(f'End {time.time()} {current_song_index=} {len(song_list) - 1=}')
+            logging.debug(
+                f"End {time.time()} {current_song_index=} {len(song_list) - 1=}"
+            )
             if current_song_index < len(song_list) - 1:
                 forward_command()
             else:
                 stop_command()
             return
-    # need to check if busy otherwise get_pos() will return 0 and update 
+    # need to check if busy otherwise get_pos() will return 0 and update
     # labels with just slider_start_position
     if pygame.mixer.music.get_busy():
-        current_time = pygame.mixer.music.get_pos()/1000 + slider_start_position
-        current_time_str = time.strftime('%H:%M:%S', time.gmtime(current_time))
-        song_length_str = time.strftime('%H:%M:%S', time.gmtime(song_length))
+        current_time = pygame.mixer.music.get_pos() / 1000 + slider_start_position
+        current_time_str = time.strftime("%H:%M:%S", time.gmtime(current_time))
+        song_length_str = time.strftime("%H:%M:%S", time.gmtime(song_length))
         status_bar.config(text=f"Time elapsed {current_time_str} of {song_length_str}")
         set_slide(current_time)
-        
-    # run again every 1000 ms
-    logging.debug(f'get_play_time {time.time()}')
-    status_bar_after = status_bar.after(1000, get_play_time)
-    
 
-status_bar = Label(root, text='', bd=1, relief=GROOVE, anchor=E)
+    # run again every 1000 ms
+    logging.debug(f"get_play_time {time.time()}")
+    status_bar_after = status_bar.after(1000, get_play_time)
+
+
+status_bar = Label(root, text="", bd=1, relief=GROOVE, anchor=E)
 status_bar.pack(fill=X, side=BOTTOM, ipady=2)
+
 
 def set_slide(current_time: float):
     slider_var.set(current_time)
-    slider_label.config(text=time.strftime('%H:%M:%S', time.gmtime(current_time)))
+    slider_label.config(text=time.strftime("%H:%M:%S", time.gmtime(current_time)))
+
 
 def set_slider_start_position(event: Event):
     global slider_start_position
@@ -234,16 +306,27 @@ def set_slider_start_position(event: Event):
     status_bar.after_cancel(status_bar_after)
     play_song(current_song_index, slider_start_position)
 
+
 slider_var = IntVar(root, value=0)
 # if we use Scale(command=FUNC), FUNC will be called at every slide
 # and it will call many get_play_time(), which will call many after()
 # and these many after will be called sometime even after song is finished.
 # It is better to use bind() and get the slider position only when user
 # releases it, so FUNC will be called only once
-slider = ttk.Scale(master_frame, from_=0, to=100, orient=HORIZONTAL, length=550, variable=slider_var, state=DISABLED)
-slider.bind("<ButtonRelease-1>",set_slider_start_position)
+slider = ttk.Scale(
+    master_frame,
+    from_=0,
+    to=100,
+    orient=HORIZONTAL,
+    length=550,
+    variable=slider_var,
+    state=DISABLED,
+)
+slider.bind("<ButtonRelease-1>", set_slider_start_position)
 slider.grid(row=2, column=0, pady=20, columnspan=2)
-slider_label = Label(master_frame, text=time.strftime('%H:%M:%S', time.gmtime(0)), anchor=W)
+slider_label = Label(
+    master_frame, text=time.strftime("%H:%M:%S", time.gmtime(0)), anchor=W
+)
 slider_label.grid(row=3, column=0)
 
 root.mainloop()

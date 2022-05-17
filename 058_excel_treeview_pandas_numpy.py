@@ -4,8 +4,12 @@ import os
 from tkinter.constants import END
 import pandas as pd
 import logging
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s',
-                    datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 
 class TkinterApp:
@@ -17,7 +21,7 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
         self.root.geometry(f"{width}x{heigth}")
 
         self.frame = tk.Frame(self.root)
@@ -29,8 +33,8 @@ class TkinterApp:
         self.root.config(menu=self.menu)
 
         self.file_menu = Menu(self.menu, tearoff=False)
-        self.menu.add_cascade(label='Spreadsheets', menu=self.file_menu)
-        self.file_menu.add_command(label='Open', command=self.load_data)
+        self.menu.add_cascade(label="Spreadsheets", menu=self.file_menu)
+        self.file_menu.add_command(label="Open", command=self.load_data)
 
         self.label = Label(self.root, text="")
         self.label.pack(pady=10)
@@ -38,31 +42,34 @@ class TkinterApp:
     def load_data(self):
         self.filename = self.file_open()
         if not self.filename:
-            logging.debug(f'no file selected')
+            logging.debug(f"no file selected")
             return
-        logging.debug(f'{self.filename}')
+        logging.debug(f"{self.filename}")
         if not self.read_data():
-            logging.debug(f'no data')
+            logging.debug(f"no data")
             return
         self.clear_tree()
         self.setup_tree()
 
     def file_open(self):
-        logging.debug(f'file_open')
-        filename = filedialog.askopenfilename(initialdir=".", title="Open a .xls", filetypes=(
-            ("xlss files", "*.xlsx"), ("xls files", "*.xls")))
+        logging.debug(f"file_open")
+        filename = filedialog.askopenfilename(
+            initialdir=".",
+            title="Open a .xls",
+            filetypes=(("xlss files", "*.xlsx"), ("xls files", "*.xls")),
+        )
         if not filename:
-            logging.debug(f'no file selected')
+            logging.debug(f"no file selected")
             return False
         # r string to avoid backslash \ escape
         filename = r"{}".format(filename)
         return filename
 
     def read_data(self):
-        logging.debug(f'read_data')
+        logging.debug(f"read_data")
         try:
             self.df = pd.read_excel(self.filename)
-            logging.debug(f'{self.df.head()}')
+            logging.debug(f"{self.df.head()}")
             return True
         except ValueError:
             self.label.config(text="File couldn't be open")
@@ -79,7 +86,7 @@ class TkinterApp:
     def setup_tree(self):
         self.tree.config(columns=list(self.df.columns), show="headings")
         # Loop thru column list for headers
-        for column in self.tree['column']:
+        for column in self.tree["column"]:
             self.tree.heading(column, text=column)
 
         # put data in treeview

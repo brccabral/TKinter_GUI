@@ -3,14 +3,15 @@ from tkinter.constants import END
 
 root = tk.Tk()
 root.title("Simple Calculator")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 
 e = tk.Entry(root, width=35, borderwidth=5)
 e.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
-expression = ''
-last_operation = ''
-last_number = ''
+expression = ""
+last_operation = ""
+last_number = ""
+
 
 def btn_value(number):
     global last_number
@@ -19,14 +20,16 @@ def btn_value(number):
     last_number = current + str(number)
     e.insert(0, last_number)
 
+
 def btn_operation(c_func):
     global expression, last_operation
     if not e.get():
         return
     last_operation = c_func
-    expression = e.get()+last_operation
+    expression = e.get() + last_operation
     label.config(text=expression)
     e.delete(0, END)
+
 
 def btn_equal():
     global expression, last_number
@@ -35,15 +38,17 @@ def btn_equal():
     expression += f"{last_number}"
     result = eval(expression)
     expression = f"{result}{last_operation}"
-    label.config(text=expression+last_number)
+    label.config(text=expression + last_number)
     e.delete(0, END)
     e.insert(0, f"{result}")
+
 
 def btn_clear():
     global expression
     e.delete(0, END)
-    expression = ''
+    expression = ""
     label.config(text=expression)
+
 
 button_1 = tk.Button(root, text="1", padx=40, pady=20, command=lambda: btn_value(1))
 button_2 = tk.Button(root, text="2", padx=40, pady=20, command=lambda: btn_value(2))
@@ -55,10 +60,18 @@ button_7 = tk.Button(root, text="7", padx=40, pady=20, command=lambda: btn_value
 button_8 = tk.Button(root, text="8", padx=40, pady=20, command=lambda: btn_value(8))
 button_9 = tk.Button(root, text="9", padx=40, pady=20, command=lambda: btn_value(9))
 button_0 = tk.Button(root, text="0", padx=40, pady=20, command=lambda: btn_value(0))
-button_add = tk.Button(root, text="+", padx=36, pady=20, command=lambda: btn_operation("+"))
-button_sub = tk.Button(root, text="-", padx=39, pady=20, command=lambda: btn_operation("-"))
-button_mult = tk.Button(root, text="*", padx=39, pady=20, command=lambda: btn_operation("*"))
-button_div = tk.Button(root, text="/", padx=40, pady=20, command=lambda: btn_operation("/"))
+button_add = tk.Button(
+    root, text="+", padx=36, pady=20, command=lambda: btn_operation("+")
+)
+button_sub = tk.Button(
+    root, text="-", padx=39, pady=20, command=lambda: btn_operation("-")
+)
+button_mult = tk.Button(
+    root, text="*", padx=39, pady=20, command=lambda: btn_operation("*")
+)
+button_div = tk.Button(
+    root, text="/", padx=40, pady=20, command=lambda: btn_operation("/")
+)
 button_equal = tk.Button(root, text="=", padx=39, pady=20, command=btn_equal)
 button_clear = tk.Button(root, text="C", padx=39, pady=20, command=btn_clear)
 
@@ -82,7 +95,7 @@ button_clear.grid(row=4, column=1)
 button_equal.grid(row=4, column=2)
 button_add.grid(row=4, column=3)
 
-label = tk.Label(root, text='')
+label = tk.Label(root, text="")
 label.grid(row=5, column=0, columnspan=4)
 
 root.mainloop()

@@ -16,7 +16,7 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         self.frame = tk.Frame(self.root)
         self.frame.pack(padx=5, pady=5)
@@ -28,12 +28,14 @@ class TkinterApp:
         self.textbox = tk.Text(self.frame, width=20, height=25)
         self.textbox.pack(padx=5, pady=5, side=RIGHT)
         self.textbox.config(
-            font="-size 16", yscrollcommand=self.scrollbar.set, wrap=NONE)
+            font="-size 16", yscrollcommand=self.scrollbar.set, wrap=NONE
+        )
 
         self.textbox2 = tk.Text(self.frame, width=20, height=25)
         self.textbox2.pack(padx=5, pady=5, side=LEFT)
         self.textbox2.config(
-            font="-size 16", yscrollcommand=self.scrollbar.set, wrap=NONE)
+            font="-size 16", yscrollcommand=self.scrollbar.set, wrap=NONE
+        )
 
     def multiple_scroll(self, *args):
         self.textbox.yview(*args)
@@ -47,7 +49,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

@@ -8,12 +8,13 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("400x400")
+
 
 def open_program():
     my_program = filedialog.askopenfilename()
-    my_label.config(text=f"\"{my_program}\"")
+    my_label.config(text=f'"{my_program}"')
     # os.system(f"\"{my_program}\"")
 
 

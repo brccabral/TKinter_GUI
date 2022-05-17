@@ -5,8 +5,12 @@ from tkinter import font as tkFont
 from tkinter.constants import BOTH, END, NW
 from PIL import ImageTk, Image
 import logging
-logging.basicConfig(format='%(levelname)s - %(asctime)s - %(name)s - %(message)s',
-                    datefmt='%H:%M:%S', level=logging.DEBUG)
+
+logging.basicConfig(
+    format="%(levelname)s - %(asctime)s - %(name)s - %(message)s",
+    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+)
 
 
 class TkinterApp:
@@ -22,10 +26,10 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         # change default font size
-        self.default_font = tkFont.nametofont('TkDefaultFont')
+        self.default_font = tkFont.nametofont("TkDefaultFont")
         self.default_font.config(size=20)
 
         # make app not resizable
@@ -40,7 +44,8 @@ class TkinterApp:
         self.label.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.welcome_label = tk.Label(
-            self.root, text="Welcome", font=('DejaVu Sans', 32))
+            self.root, text="Welcome", font=("DejaVu Sans", 32)
+        )
         self.welcome_label.pack(pady=20)
 
         self.frame = Frame(self.root)
@@ -58,31 +63,36 @@ class TkinterApp:
         self.canvas.pack(fill=BOTH, expand=True)
 
         # keep return value to be used in resize function
-        self.canvas_bg = self.canvas.create_image(
-            0, 0, image=self.bg_image, anchor=NW)
+        self.canvas_bg = self.canvas.create_image(0, 0, image=self.bg_image, anchor=NW)
 
         # create username Entry field
-        self.username = Entry(self.root, width=17, fg="red",
-                              bd=0, font=self.default_font)
+        self.username = Entry(
+            self.root, width=17, fg="red", bd=0, font=self.default_font
+        )
         self.username.insert(0, "username")
         self.username.bind("<Button-1>", self.clear_entries)
         self.username_window = self.canvas.create_window(
-            34, 290, anchor=NW, window=self.username)
+            34, 290, anchor=NW, window=self.username
+        )
 
         # create password Entry field
         # the config to change to * is done in clear_entries() below
-        self.password = Entry(self.root, width=17, fg="red",
-                              bd=0, font=self.default_font)
+        self.password = Entry(
+            self.root, width=17, fg="red", bd=0, font=self.default_font
+        )
         self.password.insert(0, "password")
         self.password.bind("<Button-1>", self.clear_entries)
         self.password_window = self.canvas.create_window(
-            34, 370, anchor=NW, window=self.password)
+            34, 370, anchor=NW, window=self.password
+        )
 
         # create login button
         self.login_button = Button(
-            self.root, text="Login", width=15, command=self.check_login)
+            self.root, text="Login", width=15, command=self.check_login
+        )
         self.login_window = self.canvas.create_window(
-            36, 470, anchor=NW, window=self.login_button)
+            36, 470, anchor=NW, window=self.login_button
+        )
 
         self.canvas.bind("<Configure>", self.resize)
 
@@ -99,13 +109,13 @@ class TkinterApp:
         self.password.destroy()
         self.login_button.destroy()
 
-        self.canvas.create_text(200, 40, text="Welcome",
-                                font=('DejaVu Sans', 32), fill="red")
+        self.canvas.create_text(
+            200, 40, text="Welcome", font=("DejaVu Sans", 32), fill="red"
+        )
 
     def resize(self, event: Event):
-        logging.debug(f'resize {event=}')
-        resized = self.bg_original.resize(
-            (event.width, event.height), Image.ANTIALIAS)
+        logging.debug(f"resize {event=}")
+        resized = self.bg_original.resize((event.width, event.height), Image.ANTIALIAS)
         self.bg_image = ImageTk.PhotoImage(resized)
         self.canvas.itemconfig(self.canvas_bg, image=self.bg_image)
 
@@ -117,7 +127,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():

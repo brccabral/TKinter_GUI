@@ -9,7 +9,7 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("500x400")
 
 
@@ -42,22 +42,24 @@ root.geometry("500x400")
 # engine.runAndWait()
 # engine.stop()
 
-my_entry = tk.Entry(root, font=('Helvetica', 28))
+my_entry = tk.Entry(root, font=("Helvetica", 28))
 my_entry.pack(pady=10)
 
+
 def talk():
-    engine = pyttsx3.init(driverName='espeak', debug=True)
-    # on terminal 
+    engine = pyttsx3.init(driverName="espeak", debug=True)
+    # on terminal
     # this lists the languages only
     ## espeak --voices=
     # with the language we can check the available voices (female/different accents)
     ## espeak --voices=en
-    engine.setProperty('voice', 'us-mbrola-1')
-    engine.setProperty('rate', 150)
+    engine.setProperty("voice", "us-mbrola-1")
+    engine.setProperty("rate", 150)
     engine.say(my_entry.get())
     engine.runAndWait()
     engine.stop()
     my_entry.delete(0, END)
+
 
 my_button = tk.Button(root, text="Speak", command=talk)
 my_button.pack()

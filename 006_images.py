@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 from tkinter.constants import ACTIVE, DISABLED, E, SUNKEN, W
+
 # tkinter doesn't work with jpg
 from PIL import ImageTk, Image
 
@@ -10,7 +11,7 @@ if os.name == "nt":
     root.wm_iconbitmap(bitmap="python3.ico")
 else:
     root.wm_iconbitmap(bitmap="@python3.xbm")
-root.iconphoto(root._w, tk.PhotoImage(file='python3.png'))
+root.iconphoto(root._w, tk.PhotoImage(file="python3.png"))
 root.geometry("400x400")
 
 my_img1 = ImageTk.PhotoImage(Image.open("images/0.jpg"))
@@ -19,13 +20,7 @@ my_img3 = ImageTk.PhotoImage(Image.open("images/2.jpg"))
 my_img4 = ImageTk.PhotoImage(Image.open("images/3.jpg"))
 my_img5 = ImageTk.PhotoImage(Image.open("images/4.jpg"))
 
-image_list = [
-    my_img1,
-    my_img2,
-    my_img3,
-    my_img4,
-    my_img5
-    ]
+image_list = [my_img1, my_img2, my_img3, my_img4, my_img5]
 
 current_index = 0
 
@@ -38,9 +33,15 @@ image_holder.pack()
 
 # relief=SUNKEN - give a look of is going inside the screen
 # anchor=E - puts text aligned to the East
-status_label = tk.Label(root, text=f"Image {current_index+1} of {len(image_list)}", bd=1, relief=SUNKEN, anchor=E)
+status_label = tk.Label(
+    root,
+    text=f"Image {current_index+1} of {len(image_list)}",
+    bd=1,
+    relief=SUNKEN,
+    anchor=E,
+)
 # sticky=W+E - stretches the label on both directions West and East
-status_label.grid(row=2, column=0, columnspan=3, sticky=W+E)
+status_label.grid(row=2, column=0, columnspan=3, sticky=W + E)
 
 
 def image_loop(index):
@@ -53,16 +54,17 @@ def image_loop(index):
         current_index = 0
         button_back.config(state=DISABLED)
 
-    if current_index >= len(image_list)-1:
+    if current_index >= len(image_list) - 1:
         current_index = len(image_list) - 1
         button_next.config(state=DISABLED)
-    
+
     # # apply new image
     image_holder.config(image=image_list[current_index])
 
     # # change status text
     status_label.config(text=f"Image {current_index+1} of {len(image_list)}")
     status_label.grid_propagate(False)
+
 
 button_back = tk.Button(root, text="<<", command=lambda: image_loop(-1), state=DISABLED)
 button_quit = tk.Button(root, text="Exit program", command=root.quit)

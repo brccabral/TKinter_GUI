@@ -16,35 +16,40 @@ class TkinterApp:
             self.root.wm_iconbitmap(bitmap="python3.ico")
         else:
             self.root.wm_iconbitmap(bitmap="@python3.xbm")
-        self.root.iconphoto(self.root._w, tk.PhotoImage(file='python3.png'))
+        self.root.iconphoto(self.root._w, tk.PhotoImage(file="python3.png"))
 
         print(list(font.families()))
 
-        self.bigFont = font.Font(family="Helvetica",
-                                 size=42,
-                                 weight="bold",
-                                 slant="italic",
-                                 underline=0,
-                                 overstrike=0)
-        self.button1 = tk.Button(
-            self.root, text="Helvetica", font=self.bigFont)
+        self.bigFont = font.Font(
+            family="Helvetica",
+            size=42,
+            weight="bold",
+            slant="italic",
+            underline=0,
+            overstrike=0,
+        )
+        self.button1 = tk.Button(self.root, text="Helvetica", font=self.bigFont)
         self.button1.pack(pady=20)
 
-        self.times = font.Font(family="Times",
-                               size=24,
-                               weight="normal",
-                               slant="italic",
-                               underline=0,
-                               overstrike=1)
+        self.times = font.Font(
+            family="Times",
+            size=24,
+            weight="normal",
+            slant="italic",
+            underline=0,
+            overstrike=1,
+        )
         self.button2 = tk.Button(self.root, text="Times", font=self.times)
         self.button2.pack(pady=20)
 
-        self.lohit = font.Font(family="Lohit Tamil",
-                               size=32,
-                               weight="normal",
-                               slant="roman",
-                               underline=1,
-                               overstrike=0)
+        self.lohit = font.Font(
+            family="Lohit Tamil",
+            size=32,
+            weight="normal",
+            slant="roman",
+            underline=1,
+            overstrike=0,
+        )
         self.button3 = tk.Button(self.root, text="Lohit Tamil", font=self.lohit)
         self.button3.pack(pady=20)
 
@@ -56,7 +61,8 @@ class TkinterApp:
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.root.geometry(
-            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}")
+            f"{self.width}x{self.height}+{screen_width//2-self.width//2}+{screen_height//2-self.height//2}"
+        )
 
 
 def main():
